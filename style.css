@@ -4239,3 +4239,247 @@ body.carrinho-aberto {
         width: 100%;
     }
 }
+
+
+
+/* =====================================================
+   AJUSTE MOBILE 2 - EVITAR TEXTOS CORTADOS
+   Mantém o desktop intacto
+===================================================== */
+
+@media (max-width: 750px) {
+
+    /* A faixa superior agora mostra TODAS as informações */
+    .barra-superior {
+        height: auto;
+        overflow: visible;
+    }
+
+    .barra-superior-conteudo {
+        width: 100%;
+        max-width: 100%;
+        min-height: 0;
+
+        padding: 7px 10px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        gap: 4px 8px;
+
+        white-space: normal;
+        overflow: visible;
+
+        text-align: center;
+        line-height: 1.3;
+    }
+
+    /* Reexibe itens que regras anteriores escondiam */
+    .barra-superior-conteudo span {
+        display: inline !important;
+        flex: 0 0 auto;
+    }
+
+    .barra-superior-conteudo .barra-ponto {
+        display: inline !important;
+    }
+
+    /* Cabeçalho: nada pode escapar da largura do celular */
+    .topo {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .topo-conteudo {
+        max-width: 100%;
+    }
+
+    .topo-conteudo .marca,
+    .topo-conteudo .btn-carrinho {
+        min-width: 0;
+    }
+
+    /* Hero */
+    .apresentacao-premium,
+    .hero-conteudo {
+        max-width: 100%;
+        overflow: visible;
+    }
+
+    .hero-etiqueta,
+    .apresentacao-premium h1,
+    .apresentacao-premium p,
+    .hero-botao,
+    .hero-diferenciais strong,
+    .hero-diferenciais span {
+        overflow: visible;
+        text-overflow: clip;
+    }
+
+    .apresentacao-premium h1 {
+        word-break: normal;
+        overflow-wrap: break-word;
+    }
+
+    .apresentacao-premium p {
+        word-break: normal;
+        overflow-wrap: break-word;
+    }
+
+    /* Diferenciais nunca ficam cortados */
+    .hero-diferenciais {
+        align-items: start;
+    }
+
+    .hero-diferenciais div {
+        overflow: visible;
+    }
+
+    .hero-diferenciais strong,
+    .hero-diferenciais span {
+        display: block;
+        white-space: normal;
+        word-break: normal;
+        overflow-wrap: break-word;
+    }
+
+    /* Filtros */
+    .titulo-filtros {
+        width: 100%;
+        flex-wrap: wrap;
+        row-gap: 6px;
+    }
+
+    .titulo-filtros h2,
+    .btn-limpar-filtros {
+        min-width: 0;
+    }
+
+    .grupo-filtro,
+    .grupo-filtro select {
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    /* Categorias: rolagem horizontal sem cortar os botões */
+    .categorias {
+        width: calc(100% + 12px);
+        margin-right: -12px;
+        padding-right: 12px;
+        overflow-x: auto;
+        overflow-y: visible;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Cards */
+    .grade-produtos,
+    .produto,
+    .produto-informacoes {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .produto h3,
+    .produto-categoria,
+    .preco-original,
+    .preco-promocional,
+    .preco-normal {
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+        overflow-wrap: break-word;
+    }
+
+    /* Rodapé */
+    .rodape,
+    .rodape-conteudo,
+    .rodape-final {
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .rodape-marca strong,
+    .rodape-marca p,
+    .rodape-marca span,
+    .rodape-redes h3,
+    .link-social,
+    .rodape-final p {
+        white-space: normal;
+        overflow: visible;
+        overflow-wrap: break-word;
+    }
+}
+
+
+/* Em celulares menores, deixamos a faixa superior ainda mais organizada */
+@media (max-width: 480px) {
+
+    .barra-superior-conteudo {
+        padding: 6px 8px;
+        gap: 3px 6px;
+        font-size: 8px;
+        letter-spacing: 0.25px;
+    }
+
+    /* Cada frase pode quebrar naturalmente sem sumir */
+    .barra-superior-conteudo span {
+        max-width: 100%;
+    }
+
+    .apresentacao-premium h1 {
+        font-size: 29px;
+    }
+
+    .apresentacao-premium p {
+        font-size: 12.5px;
+    }
+
+    .hero-diferenciais {
+        gap: 6px;
+    }
+
+    .hero-diferenciais strong {
+        font-size: 8.5px;
+    }
+
+    .hero-diferenciais span {
+        font-size: 7.5px;
+    }
+
+    .titulo-filtros h2 {
+        font-size: 20px;
+    }
+
+    .btn-limpar-filtros {
+        font-size: 11px;
+    }
+}
+
+
+/* Em telas muito estreitas, evita qualquer compressão */
+@media (max-width: 390px) {
+
+    .barra-superior-conteudo {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .hero-acoes {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-diferenciais {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .hero-diferenciais div:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .titulo-filtros {
+        align-items: flex-start;
+    }
+}
