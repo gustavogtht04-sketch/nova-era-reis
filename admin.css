@@ -940,3 +940,493 @@ body {
         font-size: 22px;
     }
 }
+
+
+
+/* =====================================================
+   REFINAMENTO FINAL - PAINEL ADMINISTRATIVO
+   Visual mais compacto, profissional e responsivo
+===================================================== */
+
+/* TOPO */
+.topo-admin {
+    min-height: 104px;
+    padding: 12px 28px;
+    gap: 22px;
+}
+
+.marca-admin {
+    min-width: 0;
+    gap: 14px;
+}
+
+.logo-admin {
+    width: 128px;
+    height: 78px;
+    object-fit: contain;
+    object-position: left center;
+}
+
+.marca-admin-texto {
+    padding-left: 14px;
+}
+
+.admin-etiqueta {
+    display: block;
+    margin-bottom: 4px;
+    color: #777777;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.marca-admin-texto p {
+    font-size: 12px;
+    color: #d0d0d0;
+}
+
+.topo-acoes {
+    gap: 8px;
+}
+
+.btn-loja,
+.btn-sair {
+    height: 38px;
+    padding: 0 15px;
+    border-radius: 9px;
+    font-size: 12px;
+}
+
+
+/* CONTEÚDO */
+.container-admin {
+    max-width: 1120px;
+    padding: 28px 20px 48px;
+}
+
+.cabecalho-produtos {
+    margin-bottom: 22px;
+}
+
+.admin-secao-etiqueta {
+    display: inline-block;
+    margin-bottom: 5px;
+    color: #888888;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+}
+
+.cabecalho-produtos h2 {
+    font-size: 26px;
+    margin-bottom: 4px;
+}
+
+.cabecalho-produtos p {
+    font-size: 13px;
+}
+
+.cabecalho-produtos .btn-principal {
+    padding: 10px 16px;
+    font-size: 13px;
+}
+
+
+/* LISTA */
+.lista-produtos {
+    padding: 14px 18px;
+    min-height: 110px;
+    border-radius: 15px;
+}
+
+.produto-admin {
+    grid-template-columns: 64px minmax(0, 1fr) auto;
+    gap: 14px;
+    padding: 12px 0;
+}
+
+.produto-admin img,
+.sem-foto-admin {
+    width: 64px;
+    height: 76px;
+    border-radius: 9px;
+}
+
+.produto-admin-info {
+    min-width: 0;
+}
+
+.produto-admin-info h3 {
+    margin-bottom: 4px;
+    font-size: 15px;
+    line-height: 1.25;
+}
+
+.produto-admin-info p {
+    margin-bottom: 3px;
+    font-size: 12px;
+    line-height: 1.35;
+}
+
+.produto-admin-acoes {
+    flex-wrap: nowrap;
+    gap: 7px;
+}
+
+.btn-editar,
+.btn-status,
+.btn-excluir {
+    min-height: 32px;
+    padding: 7px 11px !important;
+    border-radius: 7px !important;
+    font-size: 11px !important;
+}
+
+
+/* FORMULÁRIO */
+.formulario-produto {
+    max-width: 620px;
+    max-height: 90vh;
+    padding: 22px;
+    border-radius: 16px;
+}
+
+.titulo-formulario {
+    margin-bottom: 20px;
+}
+
+.titulo-formulario h2 {
+    font-size: 21px;
+}
+
+#btnFecharFormulario {
+    width: 34px;
+    height: 34px;
+    font-size: 21px;
+}
+
+#formProduto label {
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+#formProduto input,
+#formProduto textarea,
+#formProduto select {
+    padding: 11px 12px;
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+
+.ajuda-campo {
+    font-size: 11px;
+    margin-top: -8px;
+    margin-bottom: 15px;
+}
+
+.bloco-fotos {
+    padding: 16px;
+    border-radius: 12px;
+}
+
+.botao-selecionar-fotos {
+    min-height: 44px;
+}
+
+.campo-checkbox {
+    margin: 16px 0 18px;
+}
+
+.acoes-formulario {
+    gap: 8px;
+}
+
+.acoes-formulario .btn-principal,
+.acoes-formulario .btn-secundario {
+    padding: 10px 15px;
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   TABLET / CELULAR
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .topo-admin {
+        min-height: 86px;
+        padding: 10px 12px;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .marca-admin {
+        min-width: 0;
+        gap: 8px;
+    }
+
+    .logo-admin {
+        width: 82px;
+        height: 58px;
+        flex: 0 0 auto;
+    }
+
+    .marca-admin-texto {
+        min-width: 0;
+        padding-left: 9px;
+    }
+
+    .admin-etiqueta {
+        display: none;
+    }
+
+    .marca-admin-texto p {
+        max-width: 150px;
+        white-space: normal;
+        font-size: 11px;
+        line-height: 1.25;
+    }
+
+    .topo-acoes {
+        flex-shrink: 0;
+        gap: 6px;
+    }
+
+    .btn-loja,
+    .btn-sair {
+        min-width: 0;
+        height: 36px;
+        padding: 0 11px;
+        font-size: 10px;
+    }
+
+    .container-admin {
+        padding: 22px 12px 36px;
+    }
+
+    .cabecalho-produtos {
+        gap: 14px;
+        margin-bottom: 18px;
+    }
+
+    .cabecalho-produtos h2 {
+        font-size: 24px;
+    }
+
+    .cabecalho-produtos p {
+        font-size: 12px;
+    }
+
+    .cabecalho-produtos .btn-principal {
+        width: auto;
+        align-self: flex-start;
+        padding: 10px 14px;
+    }
+
+    .lista-produtos {
+        padding: 12px;
+    }
+
+    .produto-admin {
+        grid-template-columns: 58px minmax(0, 1fr);
+        gap: 10px;
+        padding: 11px 0;
+    }
+
+    .produto-admin img,
+    .sem-foto-admin {
+        width: 58px;
+        height: 70px;
+    }
+
+    .produto-admin-info h3 {
+        font-size: 14px;
+        margin-bottom: 3px;
+    }
+
+    .produto-admin-info p {
+        font-size: 11px;
+    }
+
+    .produto-admin-acoes {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 6px;
+        margin-top: 2px;
+    }
+
+    .produto-admin-acoes button {
+        width: 100%;
+        min-width: 0;
+        min-height: 34px;
+        padding: 7px 6px !important;
+        font-size: 10px !important;
+    }
+
+    .area-formulario {
+        padding: 10px;
+        align-items: flex-start;
+    }
+
+    .formulario-produto {
+        max-width: 100%;
+        max-height: calc(100vh - 20px);
+        margin-top: 0;
+        padding: 18px 14px;
+        border-radius: 14px;
+    }
+
+    .titulo-formulario {
+        margin-bottom: 17px;
+    }
+
+    .titulo-formulario h2 {
+        font-size: 19px;
+    }
+
+    .acoes-formulario {
+        flex-direction: row;
+    }
+
+    .acoes-formulario button {
+        width: auto;
+        flex: 1;
+    }
+}
+
+
+/* =====================================================
+   CELULAR PEQUENO
+===================================================== */
+
+@media (max-width: 480px) {
+
+    .topo-admin {
+        min-height: 78px;
+        padding: 8px 10px;
+    }
+
+    .logo-admin {
+        width: 68px;
+        height: 52px;
+    }
+
+    .marca-admin-texto {
+        padding-left: 7px;
+    }
+
+    .marca-admin-texto p {
+        max-width: 105px;
+        font-size: 9px;
+    }
+
+    .btn-loja,
+    .btn-sair {
+        height: 34px;
+        padding: 0 9px;
+        font-size: 9px;
+        border-radius: 8px;
+    }
+
+    .container-admin {
+        padding: 18px 10px 30px;
+    }
+
+    .cabecalho-produtos {
+        margin-bottom: 16px;
+    }
+
+    .admin-secao-etiqueta {
+        font-size: 8px;
+    }
+
+    .cabecalho-produtos h2 {
+        font-size: 22px;
+    }
+
+    .cabecalho-produtos p {
+        font-size: 11px;
+    }
+
+    .cabecalho-produtos .btn-principal {
+        padding: 9px 12px;
+        font-size: 11px;
+    }
+
+    .lista-produtos {
+        padding: 10px;
+        border-radius: 13px;
+    }
+
+    .produto-admin {
+        grid-template-columns: 52px minmax(0, 1fr);
+        gap: 9px;
+    }
+
+    .produto-admin img,
+    .sem-foto-admin {
+        width: 52px;
+        height: 64px;
+        border-radius: 8px;
+    }
+
+    .produto-admin-info h3 {
+        font-size: 13px;
+    }
+
+    .produto-admin-info p {
+        font-size: 10px;
+    }
+
+    .produto-admin-acoes {
+        gap: 5px;
+    }
+
+    .produto-admin-acoes button {
+        min-height: 32px;
+        font-size: 9px !important;
+    }
+
+    .formulario-produto {
+        padding: 16px 12px;
+    }
+
+    .preview-fotos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* =====================================================
+   TELAS MUITO ESTREITAS
+===================================================== */
+
+@media (max-width: 360px) {
+
+    .marca-admin-texto {
+        display: none;
+    }
+
+    .topo-admin {
+        grid-template-columns: 1fr auto;
+    }
+
+    .logo-admin {
+        width: 60px;
+        height: 48px;
+    }
+
+    .btn-loja,
+    .btn-sair {
+        padding: 0 8px;
+        font-size: 8px;
+    }
+
+    .produto-admin-acoes {
+        grid-template-columns: 1fr;
+    }
+}
