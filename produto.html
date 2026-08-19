@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Produto | Nova Era Reis</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         CABEÇALHO
+    ========================== -->
+
+    <header class="topo">
+
+        <div class="topo-conteudo">
+
+            <div class="marca">
+
+                <a href="index.html">
+
+                    <img
+                        src="imagens/logo-nova-era-reis.png"
+                        alt="Nova Era Reis Multimarcas"
+                        class="logo-site"
+                    >
+
+                </a>
+
+            </div>
+
+
+            <!-- CARRINHO -->
+
+            <button
+                type="button"
+                id="btnAbrirCarrinho"
+                class="btn-carrinho"
+                aria-label="Abrir carrinho"
+            >
+
+                <span class="icone-carrinho">
+                    🛒
+                </span>
+
+                <span class="texto-carrinho">
+                    Carrinho
+                </span>
+
+                <span
+                    id="contadorCarrinho"
+                    class="contador-carrinho"
+                >
+                    0
+                </span>
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         PÁGINA DO PRODUTO
+    ========================== -->
+
+    <main class="produto-pagina">
+
+        <a
+            href="index.html"
+            class="voltar"
+        >
+            ← Voltar
+        </a>
+
+
+        <section class="detalhe-produto">
+
+
+            <!-- =========================
+                 GALERIA DO PRODUTO
+            ========================== -->
+
+            <div class="galeria-produto">
+
+                <div class="detalhe-imagem">
+
+                    <img
+                        id="imagemProduto"
+                        src=""
+                        alt="Produto"
+                    >
+
+                </div>
+
+
+                <!-- MINIATURAS -->
+
+                <div
+                    class="miniaturas"
+                    id="miniaturasProduto"
+                >
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 INFORMAÇÕES DO PRODUTO
+            ========================== -->
+
+            <div class="detalhe-informacoes">
+
+
+                <!-- CATEGORIA -->
+
+                <span
+                    class="produto-categoria"
+                    id="categoriaProduto"
+                >
+                </span>
+
+
+                <!-- NOME -->
+
+                <h2 id="nomeProduto">
+                </h2>
+
+
+                <!-- PREÇO -->
+
+                <p
+                    class="preco-detalhe"
+                    id="precoProduto"
+                >
+                </p>
+
+
+                <!-- =========================
+                     TAMANHOS
+                ========================== -->
+
+                <div
+                    id="blocoTamanhos"
+                    class="bloco-detalhe"
+                >
+
+                    <h3>
+                        Tamanhos disponíveis
+                    </h3>
+
+
+                    <div
+                        class="tamanhos"
+                        id="tamanhosProduto"
+                    >
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     CORES
+                ========================== -->
+
+                <div
+                    id="blocoCores"
+                    class="bloco-detalhe"
+                >
+
+                    <h3>
+                        Cores disponíveis
+                    </h3>
+
+
+                    <div
+                        class="cores"
+                        id="coresProduto"
+                    >
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     QUANTIDADE
+                ========================== -->
+
+                <div class="bloco-detalhe">
+
+                    <h3>
+                        Quantidade
+                    </h3>
+
+
+                    <div class="quantidade-produto">
+
+
+                        <!-- DIMINUIR -->
+
+                        <button
+                            type="button"
+                            id="btnDiminuirQuantidade"
+                            aria-label="Diminuir quantidade"
+                        >
+                            −
+                        </button>
+
+
+                        <!-- QUANTIDADE -->
+
+                        <span id="quantidadeSelecionada">
+                            1
+                        </span>
+
+
+                        <!-- AUMENTAR -->
+
+                        <button
+                            type="button"
+                            id="btnAumentarQuantidade"
+                            aria-label="Aumentar quantidade"
+                        >
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     DESCRIÇÃO
+                ========================== -->
+
+                <div class="bloco-detalhe">
+
+                    <h3>
+                        Descrição
+                    </h3>
+
+
+                    <p id="descricaoProduto">
+                    </p>
+
+                </div>
+
+
+                <!-- =========================
+                     ADICIONAR AO CARRINHO
+                ========================== -->
+
+                <button
+                    type="button"
+                    id="btnAdicionarCarrinho"
+                    class="botao-adicionar-carrinho"
+                >
+                    Adicionar ao carrinho
+                </button>
+
+
+                <!-- MENSAGEM -->
+
+                <div
+                    id="mensagemCarrinho"
+                    class="mensagem-carrinho"
+                >
+                    Produto adicionado ao carrinho!
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         RODAPÉ
+    ========================== -->
+
+    <footer class="rodape">
+
+        <div class="rodape-conteudo">
+
+
+            <!-- MARCA -->
+
+            <div class="rodape-marca">
+
+                <strong>
+                    NOVA ERA REIS
+                </strong>
+
+                <p>
+                    MULTIMARCAS
+                </p>
+
+                <span>
+                    Peças para quem exige qualidade.
+                </span>
+
+            </div>
+
+
+            <!-- ATENDIMENTO -->
+
+            <div class="rodape-redes">
+
+                <h3>
+                    Atendimento
+                </h3>
+
+
+                <div class="links-sociais">
+
+
+                    <!-- INSTAGRAM -->
+
+                    <a
+                        href="https://www.instagram.com/novaerareis_multimarcas/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="link-social"
+                        aria-label="Instagram da Nova Era Reis"
+                    >
+
+                        <span class="icone-social">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+
+                                <path
+                                    d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm10 2c1.66 0 3 1.34 3 3v10c0 1.66-1.34 3-3 3H7c-1.66 0-3-1.34-3-3V7c0-1.66 1.34-3 3-3h10zm-5 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6zm5.5-3.5a1.25 1.25 0 100 2.5 1.25 1.25 0 000-2.5z"
+                                />
+
+                            </svg>
+
+                        </span>
+
+
+                        <span>
+                            Instagram
+                        </span>
+
+                    </a>
+
+
+                    <!-- WHATSAPP -->
+
+                    <a
+                        href="https://wa.me/5521979767849?text=Ol%C3%A1%21%20Vim%20pelo%20cat%C3%A1logo%20da%20Nova%20Era%20Reis."
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="link-social"
+                        aria-label="WhatsApp da Nova Era Reis"
+                    >
+
+                        <span class="icone-social">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+
+                                <path
+                                    d="M20.52 3.48A11.82 11.82 0 0012.07 0C5.5 0 .16 5.34.16 11.91c0 2.1.55 4.15 1.6 5.95L.06 24l6.29-1.65a11.86 11.86 0 005.71 1.46h.01C18.64 23.81 24 18.47 24 11.9c0-3.18-1.24-6.17-3.48-8.42zM12.07 21.8h-.01a9.86 9.86 0 01-5.03-1.38l-.36-.21-3.73.98 1-3.64-.23-.37a9.87 9.87 0 01-1.52-5.27c0-5.46 4.44-9.9 9.9-9.9a9.83 9.83 0 017 2.9 9.82 9.82 0 012.9 7c-.01 5.45-4.45 9.89-9.92 9.89zm5.43-7.42c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.21 5.09 4.5.71.31 1.27.49 1.7.63.71.23 1.36.19 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"
+                                />
+
+                            </svg>
+
+                        </span>
+
+
+                        <span>
+                            WhatsApp
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PARTE FINAL DO RODAPÉ -->
+
+        <div class="rodape-final">
+
+            <p>
+                © 2026 Nova Era Reis Multimarcas • Todos os direitos reservados
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =========================
+         FUNDO DO CARRINHO
+    ========================== -->
+
+    <div
+        id="fundoCarrinho"
+        class="fundo-carrinho"
+    >
+    </div>
+
+
+    <!-- =========================
+         CARRINHO LATERAL
+    ========================== -->
+
+    <aside
+        id="carrinhoLateral"
+        class="carrinho-lateral"
+        aria-label="Carrinho de compras"
+    >
+
+
+        <!-- CABEÇALHO DO CARRINHO -->
+
+        <div class="carrinho-cabecalho">
+
+            <div>
+
+                <h2>
+                    Seu carrinho
+                </h2>
+
+                <p id="resumoCarrinho">
+                    Nenhum item adicionado
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="btnFecharCarrinho"
+                class="btn-fechar-carrinho"
+                aria-label="Fechar carrinho"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <!-- ITENS -->
+
+        <div
+            id="itensCarrinho"
+            class="itens-carrinho"
+        >
+
+            <div class="carrinho-vazio">
+
+                <span class="carrinho-vazio-icone">
+                    🛒
+                </span>
+
+                <h3>
+                    Seu carrinho está vazio
+                </h3>
+
+                <p>
+                    Escolha seus produtos e adicione ao carrinho.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- RODAPÉ DO CARRINHO -->
+
+        <div class="carrinho-rodape">
+
+
+            <!-- TOTAL -->
+
+            <div class="carrinho-total">
+
+                <span>
+                    Total
+                </span>
+
+                <strong id="totalCarrinho">
+                    R$ 0,00
+                </strong>
+
+            </div>
+
+
+            <!-- FINALIZAR -->
+
+            <button
+                type="button"
+                id="btnFinalizarWhatsapp"
+                class="btn-finalizar-whatsapp"
+                disabled
+            >
+                Finalizar pedido pelo WhatsApp
+            </button>
+
+
+            <!-- CONTINUAR COMPRANDO -->
+
+            <button
+                type="button"
+                id="btnContinuarComprando"
+                class="btn-continuar-comprando"
+            >
+                Continuar comprando
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="supabase.js"></script>
+
+    <script src="produtos.js"></script>
+
+    <script src="carrinho.js"></script>
+
+    <script src="produto.js"></script>
+
+
+</body>
+
+</html>

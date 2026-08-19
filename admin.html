@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Painel Administrativo | Nova Era Reis</title>
+
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         CABEÇALHO
+    ========================== -->
+
+    <header class="topo-admin">
+
+        <div class="marca-admin">
+
+            <img
+                src="imagens/logo-nova-era-reis.png"
+                alt="Nova Era Reis Multimarcas"
+                class="logo-admin"
+            >
+
+            <div class="marca-admin-texto">
+                <p>Painel Administrativo</p>
+            </div>
+
+        </div>
+
+
+        <div class="topo-acoes">
+
+            <a
+                href="index.html"
+                class="btn-loja"
+                target="_blank"
+            >
+                Ver loja
+            </a>
+
+            <!-- O botão Sair será colocado aqui pelo JavaScript -->
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         CONTEÚDO
+    ========================== -->
+
+    <main class="container-admin">
+
+
+        <!-- CABEÇALHO DOS PRODUTOS -->
+
+        <section class="cabecalho-produtos">
+
+            <div>
+
+                <h2>Produtos</h2>
+
+                <p>
+                    Gerencie os produtos exibidos no catálogo.
+                </p>
+
+            </div>
+
+
+            <button
+                id="btnNovoProduto"
+                class="btn-principal"
+                type="button"
+            >
+                + Novo produto
+            </button>
+
+        </section>
+
+
+        <!-- =========================
+             LISTA DE PRODUTOS
+        ========================== -->
+
+        <section class="lista-produtos">
+
+            <div id="carregando">
+                Carregando produtos...
+            </div>
+
+            <div id="produtosAdmin">
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             FORMULÁRIO
+        ========================== -->
+
+        <section
+            id="areaFormulario"
+            class="area-formulario oculto"
+        >
+
+            <div class="formulario-produto">
+
+
+                <!-- TÍTULO -->
+
+                <div class="titulo-formulario">
+
+                    <h2 id="tituloFormulario">
+                        Novo produto
+                    </h2>
+
+                    <button
+                        id="btnFecharFormulario"
+                        type="button"
+                        aria-label="Fechar formulário"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+
+                <!-- FORMULÁRIO -->
+
+                <form id="formProduto">
+
+
+                    <!-- ID OCULTO -->
+
+                    <input
+                        type="hidden"
+                        id="produtoId"
+                    >
+
+
+                    <!-- NOME -->
+
+                    <label for="nome">
+                        Nome do produto
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nome"
+                        placeholder="Ex.: Camiseta Premium"
+                        required
+                    >
+
+
+                    <!-- CATEGORIA -->
+
+                    <label for="categoria">
+                        Categoria
+                    </label>
+
+                    <select
+                        id="categoria"
+                        required
+                    >
+
+                        <option value="">
+                            Selecione uma categoria
+                        </option>
+
+                        <option value="camisetas">
+                            Camisetas
+                        </option>
+
+                        <option value="polos">
+                            Polos
+                        </option>
+
+                        <option value="bermudas">
+                            Bermudas
+                        </option>
+
+                        <option value="calcas">
+                            Calças
+                        </option>
+
+                        <option value="conjuntos">
+                            Conjuntos
+                        </option>
+
+                    </select>
+
+
+                    <!-- =========================
+                         PREÇO NORMAL
+                    ========================== -->
+
+                    <label for="preco">
+                        Preço
+                    </label>
+
+                    <input
+                        type="number"
+                        id="preco"
+                        step="0.01"
+                        min="0"
+                        placeholder="Ex.: 89,90"
+                        required
+                    >
+
+
+                    <!-- =========================
+                         PREÇO PROMOCIONAL
+                    ========================== -->
+
+                    <label for="precoPromocional">
+                        Preço promocional
+                        <span style="font-weight: normal; color: #777777;">
+                            (opcional)
+                        </span>
+                    </label>
+
+                    <input
+                        type="number"
+                        id="precoPromocional"
+                        step="0.01"
+                        min="0"
+                        placeholder="Ex.: 59,90"
+                    >
+
+                    <small class="ajuda-campo">
+                        Deixe vazio caso o produto não esteja em promoção.
+                    </small>
+
+
+                    <!-- DESCRIÇÃO -->
+
+                    <label for="descricao">
+                        Descrição
+                    </label>
+
+                    <textarea
+                        id="descricao"
+                        rows="4"
+                        placeholder="Descreva o produto"
+                    ></textarea>
+
+
+                    <!-- TAMANHOS -->
+
+                    <label for="tamanhos">
+                        Tamanhos disponíveis
+                    </label>
+
+                    <input
+                        type="text"
+                        id="tamanhos"
+                        placeholder="Ex.: P, M, G, GG"
+                    >
+
+                    <small class="ajuda-campo">
+                        Separe os tamanhos por vírgula.
+                    </small>
+
+
+                    <!-- CORES -->
+
+                    <label for="cores">
+                        Cores disponíveis
+                    </label>
+
+                    <input
+                        type="text"
+                        id="cores"
+                        placeholder="Ex.: Preto, Branco, Verde"
+                    >
+
+                    <small class="ajuda-campo">
+                        Separe as cores por vírgula.
+                    </small>
+
+
+                    <!-- =========================
+                         FOTOS
+                    ========================== -->
+
+                    <div class="bloco-fotos">
+
+                        <div class="titulo-fotos">
+
+                            <div>
+
+                                <label for="fotosProduto">
+                                    Fotos do produto
+                                </label>
+
+                                <p>
+                                    Você pode selecionar várias fotos.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <label
+                            for="fotosProduto"
+                            class="botao-selecionar-fotos"
+                        >
+
+                            <span class="icone-upload">
+                                ↑
+                            </span>
+
+                            Selecionar fotos
+
+                        </label>
+
+
+                        <input
+                            type="file"
+                            id="fotosProduto"
+                            accept="image/jpeg,image/png,image/webp"
+                            multiple
+                            hidden
+                        >
+
+
+                        <p
+                            id="quantidadeFotosSelecionadas"
+                            class="quantidade-fotos"
+                        >
+                            Nenhuma foto nova selecionada.
+                        </p>
+
+
+                        <!-- PRÉVIA DAS NOVAS FOTOS -->
+
+                        <div
+                            id="previewFotos"
+                            class="preview-fotos"
+                        >
+                        </div>
+
+
+                        <!-- FOTOS QUE JÁ ESTÃO NO PRODUTO -->
+
+                        <div
+                            id="areaFotosAtuais"
+                            class="fotos-atuais-container oculto"
+                        >
+
+                            <h4>
+                                Fotos atuais
+                            </h4>
+
+                            <p>
+                                Clique em remover caso não queira mais alguma foto.
+                            </p>
+
+                            <div
+                                id="fotosAtuais"
+                                class="preview-fotos"
+                            >
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- DISPONIBILIDADE -->
+
+                    <label class="campo-checkbox">
+
+                        <input
+                            type="checkbox"
+                            id="disponivel"
+                            checked
+                        >
+
+                        <span>
+                            Produto disponível no catálogo
+                        </span>
+
+                    </label>
+
+
+                    <!-- MENSAGEM -->
+
+                    <div
+                        id="mensagemFormulario"
+                        class="mensagem-formulario"
+                    >
+                    </div>
+
+
+                    <!-- BOTÕES -->
+
+                    <div class="acoes-formulario">
+
+                        <button
+                            type="button"
+                            id="btnCancelar"
+                            class="btn-secundario"
+                        >
+                            Cancelar
+                        </button>
+
+
+                        <button
+                            type="submit"
+                            id="btnSalvarProduto"
+                            class="btn-principal"
+                        >
+                            Salvar produto
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         SCRIPTS
+    ========================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+    <script src="admin.js"></script>
+
+</body>
+
+</html>
