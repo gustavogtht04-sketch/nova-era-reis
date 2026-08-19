@@ -2251,3 +2251,1462 @@ body.carrinho-aberto {
     }
 
 }
+
+
+/* =====================================================
+   NOVA ERA REIS - CABEÇALHO E HERO PREMIUM
+===================================================== */
+
+.barra-superior {
+    width: 100%;
+    background: #111111;
+    border-bottom: 1px solid #242424;
+}
+
+.barra-superior-conteudo {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 8px 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    color: #bdbdbd;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.barra-ponto {
+    color: #5f5f5f;
+}
+
+.topo {
+    padding: 0;
+    flex-direction: column;
+}
+
+.topo-conteudo {
+    width: 100%;
+    max-width: 1180px;
+    min-height: 126px;
+    margin: 0 auto;
+    padding: 14px 24px;
+
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 24px;
+}
+
+.menu-principal {
+    grid-column: 1;
+    justify-self: start;
+
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.menu-principal a {
+    position: relative;
+
+    color: #d8d8d8;
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    padding: 8px 0;
+
+    transition:
+        color 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.menu-principal a::after {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    bottom: 1px;
+
+    width: 0;
+    height: 1px;
+
+    background: #ffffff;
+
+    transition: width 0.2s ease;
+}
+
+.menu-principal a:hover {
+    color: #ffffff;
+}
+
+.menu-principal a:hover::after {
+    width: 100%;
+}
+
+.topo-conteudo .marca {
+    grid-column: 2;
+    justify-self: center;
+
+    width: auto;
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+}
+
+.topo-conteudo .logo-site {
+    width: 270px;
+    max-width: 100%;
+}
+
+.topo-conteudo .btn-carrinho {
+    grid-column: 3;
+    justify-self: end;
+
+    border-color: #2a2a2a;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.14);
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.apresentacao-premium {
+    position: relative;
+
+    min-height: 390px;
+    margin-bottom: 32px;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+    align-items: stretch;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.11), transparent 27%),
+        linear-gradient(135deg, #080808 0%, #141414 55%, #050505 100%);
+
+    border: 1px solid #1f1f1f;
+    border-radius: 24px;
+
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+}
+
+.hero-conteudo {
+    position: relative;
+    z-index: 2;
+
+    padding: 52px 54px 46px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hero-etiqueta {
+    width: fit-content;
+
+    margin-bottom: 18px;
+    padding: 7px 11px;
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+
+    color: #d5d5d5;
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+}
+
+.apresentacao-premium h1 {
+    max-width: 620px;
+
+    color: #ffffff;
+
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 0.98;
+    letter-spacing: -2.2px;
+
+    margin: 0 0 20px;
+}
+
+.apresentacao-premium h1 span {
+    color: #a9a9a9;
+}
+
+.apresentacao-premium p {
+    max-width: 590px;
+
+    color: #b8b8b8;
+
+    font-size: 16px;
+    line-height: 1.65;
+
+    margin: 0;
+}
+
+.hero-acoes {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 11px;
+
+    margin-top: 26px;
+}
+
+.hero-botao {
+    min-height: 45px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 19px;
+
+    border-radius: 11px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.hero-botao:hover {
+    transform: translateY(-2px);
+}
+
+.hero-botao-principal {
+    background: #ffffff;
+    color: #111111;
+}
+
+.hero-botao-principal:hover {
+    background: #ededed;
+}
+
+.hero-botao-secundario {
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    background: rgba(255, 255, 255, 0.04);
+    color: #ffffff;
+}
+
+.hero-botao-secundario:hover {
+    border-color: rgba(255, 255, 255, 0.42);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.hero-diferenciais {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 26px;
+
+    margin-top: 34px;
+    padding-top: 24px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.hero-diferenciais div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.hero-diferenciais strong {
+    color: #ffffff;
+    font-size: 12px;
+}
+
+.hero-diferenciais span {
+    color: #888888;
+    font-size: 11px;
+}
+
+.hero-visual {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 100%;
+
+    overflow: hidden;
+}
+
+.hero-visual::before {
+    content: "";
+
+    position: absolute;
+    width: 340px;
+    height: 340px;
+
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 50%;
+}
+
+.hero-visual::after {
+    content: "";
+
+    position: absolute;
+    width: 245px;
+    height: 245px;
+
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 50%;
+}
+
+.hero-monograma {
+    position: relative;
+    z-index: 2;
+
+    width: 180px;
+    height: 180px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.17);
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.025);
+    backdrop-filter: blur(4px);
+
+    transform: rotate(-6deg);
+}
+
+.hero-monograma span {
+    color: #ffffff;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 45px;
+    letter-spacing: 3px;
+}
+
+.hero-monograma small {
+    margin-top: 5px;
+
+    color: #8b8b8b;
+
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+.hero-linha {
+    position: absolute;
+
+    height: 1px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.15),
+        transparent
+    );
+}
+
+.hero-linha-1 {
+    width: 430px;
+    transform: rotate(36deg);
+}
+
+.hero-linha-2 {
+    width: 390px;
+    transform: rotate(-34deg);
+}
+
+
+/* Pesquisa mais integrada ao novo visual */
+.pesquisa {
+    margin-top: 0;
+    border-radius: 14px;
+}
+
+
+/* =====================================================
+   RESPONSIVIDADE DO NOVO TOPO
+===================================================== */
+
+@media (max-width: 980px) {
+
+    .menu-principal {
+        gap: 15px;
+    }
+
+    .menu-principal a {
+        font-size: 12px;
+    }
+
+    .topo-conteudo .logo-site {
+        width: 235px;
+    }
+
+    .apresentacao-premium {
+        grid-template-columns: minmax(0, 1.2fr) minmax(220px, 0.8fr);
+    }
+
+    .hero-conteudo {
+        padding: 44px 40px 40px;
+    }
+
+    .hero-monograma {
+        width: 150px;
+        height: 150px;
+    }
+
+    .hero-monograma span {
+        font-size: 38px;
+    }
+
+}
+
+
+@media (max-width: 750px) {
+
+    .barra-superior-conteudo {
+        padding: 7px 12px;
+        gap: 7px;
+
+        font-size: 9px;
+        letter-spacing: 0.3px;
+    }
+
+    .barra-superior-conteudo span:nth-child(4),
+    .barra-superior-conteudo span:nth-child(5) {
+        display: none;
+    }
+
+    .topo-conteudo {
+        min-height: 92px;
+
+        grid-template-columns: 1fr auto 1fr;
+
+        padding: 9px 14px;
+    }
+
+    .menu-principal {
+        display: none;
+    }
+
+    .topo-conteudo .marca {
+        grid-column: 2;
+    }
+
+    .topo-conteudo .logo-site {
+        width: 205px;
+        max-width: 205px;
+    }
+
+    .topo-conteudo .btn-carrinho {
+        grid-column: 3;
+        justify-self: end;
+    }
+
+    .apresentacao-premium {
+        min-height: auto;
+
+        grid-template-columns: 1fr;
+
+        border-radius: 20px;
+    }
+
+    .hero-conteudo {
+        padding: 35px 26px 30px;
+    }
+
+    .apresentacao-premium h1 {
+        font-size: 42px;
+        letter-spacing: -1.5px;
+    }
+
+    .apresentacao-premium p {
+        font-size: 14px;
+    }
+
+    .hero-acoes {
+        align-items: stretch;
+    }
+
+    .hero-botao {
+        flex: 1 1 145px;
+    }
+
+    .hero-diferenciais {
+        gap: 18px;
+        margin-top: 27px;
+        padding-top: 20px;
+    }
+
+    .hero-visual {
+        display: none;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .barra-superior-conteudo {
+        justify-content: center;
+    }
+
+    .topo-conteudo {
+        padding: 8px 10px;
+    }
+
+    .topo-conteudo .logo-site {
+        width: 185px;
+        max-width: 185px;
+    }
+
+    .topo-conteudo .btn-carrinho {
+        padding: 9px;
+    }
+
+    .apresentacao-premium {
+        border-radius: 17px;
+        margin-bottom: 25px;
+    }
+
+    .hero-conteudo {
+        padding: 30px 21px 26px;
+    }
+
+    .hero-etiqueta {
+        font-size: 8px;
+        letter-spacing: 1.3px;
+        margin-bottom: 15px;
+    }
+
+    .apresentacao-premium h1 {
+        font-size: 36px;
+        line-height: 1.02;
+    }
+
+    .apresentacao-premium p {
+        line-height: 1.55;
+    }
+
+    .hero-acoes {
+        flex-direction: column;
+    }
+
+    .hero-botao {
+        width: 100%;
+        flex: none;
+    }
+
+    .hero-diferenciais {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .hero-diferenciais div:last-child {
+        grid-column: 1 / -1;
+    }
+
+}/* =====================================================
+   HERO MAIS COMPACTO
+===================================================== */
+
+.apresentacao-premium {
+    min-height: 285px;
+    margin-bottom: 26px;
+    grid-template-columns: minmax(0, 1.25fr) minmax(230px, 0.75fr);
+    border-radius: 20px;
+}
+
+.hero-conteudo {
+    padding: 32px 44px 28px;
+}
+
+.hero-etiqueta {
+    margin-bottom: 12px;
+    padding: 5px 10px;
+    font-size: 9px;
+}
+
+.apresentacao-premium h1 {
+    max-width: 520px;
+    font-size: clamp(34px, 4vw, 48px);
+    line-height: 0.98;
+    letter-spacing: -1.5px;
+    margin-bottom: 14px;
+}
+
+.apresentacao-premium p {
+    max-width: 520px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.hero-acoes {
+    margin-top: 18px;
+    gap: 9px;
+}
+
+.hero-botao {
+    min-height: 40px;
+    padding: 0 16px;
+    font-size: 12px;
+    border-radius: 9px;
+}
+
+.hero-diferenciais {
+    gap: 24px;
+    margin-top: 22px;
+    padding-top: 17px;
+}
+
+.hero-diferenciais strong {
+    font-size: 11px;
+}
+
+.hero-diferenciais span {
+    font-size: 10px;
+}
+
+.hero-monograma {
+    width: 130px;
+    height: 130px;
+}
+
+.hero-monograma span {
+    font-size: 34px;
+}
+
+.hero-monograma small {
+    font-size: 7px;
+}
+
+.hero-visual::before {
+    width: 250px;
+    height: 250px;
+}
+
+.hero-visual::after {
+    width: 185px;
+    height: 185px;
+}
+
+
+/* CELULAR */
+
+@media (max-width: 750px) {
+
+    .apresentacao-premium {
+        min-height: auto;
+    }
+
+    .hero-conteudo {
+        padding: 27px 22px 24px;
+    }
+
+    .apresentacao-premium h1 {
+        font-size: 32px;
+        line-height: 1;
+    }
+
+    .apresentacao-premium p {
+        font-size: 13px;
+    }
+
+    .hero-diferenciais {
+        margin-top: 20px;
+        padding-top: 16px;
+    }
+
+}
+
+
+/* CELULAR PEQUENO */
+
+@media (max-width: 480px) {
+
+    .hero-conteudo {
+        padding: 24px 18px 22px;
+    }
+
+    .apresentacao-premium h1 {
+        font-size: 29px;
+    }
+
+    .hero-etiqueta {
+        font-size: 7px;
+    }
+
+}
+
+
+/* =====================================================
+   AJUSTE FINAL - HERO SEM LOGO REPETIDA
+   GRAFISMO ABSTRATO + MARCA-D'ÁGUA NO RODAPÉ
+===================================================== */
+
+/* O monograma antigo deixa de ser usado */
+.hero-monograma {
+    display: none !important;
+}
+
+/* Área visual do hero */
+.hero-visual-abstrato {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* brilho suave ao fundo */
+.hero-visual-abstrato::before {
+    content: "";
+    position: absolute;
+
+    width: 260px;
+    height: 260px;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    border: none;
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.08) 0%,
+            rgba(255, 255, 255, 0.025) 38%,
+            transparent 70%
+        );
+
+    filter: blur(2px);
+
+    z-index: 0;
+}
+
+/* remove o pseudo-elemento circular antigo */
+.hero-visual-abstrato::after {
+    content: none;
+}
+
+/* órbitas */
+.grafismo-orbita {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 50%;
+
+    transform: translate(-50%, -50%);
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+.grafismo-orbita-1 {
+    width: 125px;
+    height: 125px;
+}
+
+.grafismo-orbita-2 {
+    width: 190px;
+    height: 190px;
+
+    border-color: rgba(255, 255, 255, 0.055);
+}
+
+.grafismo-orbita-3 {
+    width: 255px;
+    height: 255px;
+
+    border-color: rgba(255, 255, 255, 0.04);
+}
+
+/* linhas diagonais */
+.grafismo-linha {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.10),
+            transparent
+        );
+
+    transform-origin: center;
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+.grafismo-linha-1 {
+    width: 340px;
+    transform: translate(-50%, -50%) rotate(34deg);
+}
+
+.grafismo-linha-2 {
+    width: 315px;
+    transform: translate(-50%, -50%) rotate(-31deg);
+}
+
+.grafismo-linha-3 {
+    width: 250px;
+    transform: translate(-50%, -50%) rotate(90deg);
+
+    opacity: 0.45;
+}
+
+/* pequenos pontos decorativos */
+.grafismo-ponto {
+    position: absolute;
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.18);
+
+    box-shadow:
+        0 0 0 5px rgba(255, 255, 255, 0.025),
+        0 0 18px rgba(255, 255, 255, 0.08);
+
+    z-index: 2;
+}
+
+.grafismo-ponto-1 {
+    top: 34%;
+    left: 62%;
+}
+
+.grafismo-ponto-2 {
+    bottom: 29%;
+    right: 22%;
+}
+
+
+/* =====================================================
+   MARCA-D'ÁGUA DO RODAPÉ
+===================================================== */
+
+.rodape {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.rodape-marca-dagua {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 360px;
+    max-width: 48vw;
+
+    height: auto;
+
+    transform: translate(-50%, -50%);
+
+    opacity: 0.035;
+
+    filter: grayscale(1);
+
+    pointer-events: none;
+    user-select: none;
+
+    z-index: 0;
+}
+
+.rodape-conteudo,
+.rodape-final {
+    position: relative;
+    z-index: 1;
+}
+
+
+/* =====================================================
+   RESPONSIVIDADE
+===================================================== */
+
+@media (max-width: 980px) {
+
+    .grafismo-orbita-1 {
+        width: 110px;
+        height: 110px;
+    }
+
+    .grafismo-orbita-2 {
+        width: 165px;
+        height: 165px;
+    }
+
+    .grafismo-orbita-3 {
+        width: 220px;
+        height: 220px;
+    }
+
+    .grafismo-linha-1 {
+        width: 290px;
+    }
+
+    .grafismo-linha-2 {
+        width: 275px;
+    }
+
+    .grafismo-linha-3 {
+        width: 220px;
+    }
+
+}
+
+
+@media (max-width: 750px) {
+
+    /* no mobile o hero visual continua oculto, como já estava */
+    .hero-visual-abstrato {
+        display: none;
+    }
+
+    .rodape-marca-dagua {
+        width: 285px;
+        max-width: 72vw;
+        opacity: 0.03;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .rodape-marca-dagua {
+        width: 235px;
+        max-width: 78vw;
+        opacity: 0.028;
+    }
+
+}
+
+
+/* =====================================================
+   AJUSTE FINAL - LOGO PRINCIPAL MAIS COMPACTA
+   E MARCA-D'ÁGUA DO RODAPÉ MAIS DISCRETA
+===================================================== */
+
+/* Cabeçalho mais baixo */
+.topo-conteudo {
+    min-height: 92px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+/* Logo principal menor */
+.topo-conteudo .logo-site {
+    width: 185px;
+    max-width: 185px;
+}
+
+/* Mantém a logo perfeitamente centralizada */
+.topo-conteudo .marca {
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =====================================================
+   MARCA-D'ÁGUA DO RODAPÉ
+===================================================== */
+
+.rodape {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* Marca-d'água centralizada, menor e discreta */
+.rodape-marca-dagua {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 170px;
+    max-width: 170px;
+    height: auto;
+
+    transform: translate(-50%, -50%);
+
+    opacity: 0.022;
+
+    filter: grayscale(1);
+
+    pointer-events: none;
+    user-select: none;
+
+    z-index: 0;
+}
+
+/* Mantém o conteúdo do rodapé na frente da marca-d'água */
+.rodape-conteudo,
+.rodape-final {
+    position: relative;
+    z-index: 1;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 980px) {
+
+    .topo-conteudo {
+        min-height: 86px;
+        padding-top: 7px;
+        padding-bottom: 7px;
+    }
+
+    .topo-conteudo .logo-site {
+        width: 170px;
+        max-width: 170px;
+    }
+
+    .rodape-marca-dagua {
+        width: 155px;
+        max-width: 155px;
+        opacity: 0.021;
+    }
+
+}
+
+
+/* =====================================================
+   CELULAR
+===================================================== */
+
+@media (max-width: 750px) {
+
+    .topo-conteudo {
+        min-height: 76px;
+        padding-top: 6px;
+        padding-bottom: 6px;
+    }
+
+    .topo-conteudo .logo-site {
+        width: 145px;
+        max-width: 145px;
+    }
+
+    .rodape-marca-dagua {
+        width: 135px;
+        max-width: 135px;
+        opacity: 0.020;
+    }
+
+}
+
+
+/* =====================================================
+   CELULAR PEQUENO
+===================================================== */
+
+@media (max-width: 480px) {
+
+    .topo-conteudo {
+        min-height: 70px;
+    }
+
+    .topo-conteudo .logo-site {
+        width: 132px;
+        max-width: 132px;
+    }
+
+    .rodape-marca-dagua {
+        width: 115px;
+        max-width: 115px;
+        opacity: 0.018;
+    }
+
+}/* =====================================================
+   AJUSTE - MARCA-D'ÁGUA ACIMA DA LINHA DO RODAPÉ
+===================================================== */
+
+.rodape-marca-dagua {
+    top: 40%;
+}
+
+.rodape-final {
+    position: relative;
+    z-index: 2;
+    margin-top: 32px;
+}
+
+
+/* =====================================================
+   AJUSTE FINAL - PÁGINA DO PRODUTO MAIS COMPACTA
+   Desktop mais leve e proporcional
+===================================================== */
+
+/* Área geral da página */
+.produto-pagina {
+    width: 100%;
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 16px 18px 28px;
+}
+
+/* Botão voltar mais próximo do conteúdo */
+.voltar {
+    margin-bottom: 14px;
+    font-size: 13px;
+}
+
+/* Duas colunas mais compactas */
+.detalhe-produto {
+    display: grid;
+    grid-template-columns: minmax(0, 0.98fr) minmax(320px, 0.82fr);
+    gap: 20px;
+    align-items: start;
+}
+
+/* Galeria */
+.galeria-produto {
+    min-width: 0;
+    max-width: 445px;
+}
+
+/* Imagem principal bem menor */
+.detalhe-imagem {
+    width: 100%;
+    height: 430px;
+    max-height: 430px;
+    border-radius: 15px;
+    overflow: hidden;
+    background: #eeeeee;
+}
+
+.detalhe-imagem img {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    aspect-ratio: auto;
+    object-fit: contain;
+    display: block;
+}
+
+/* Miniaturas menores */
+.miniaturas,
+.miniaturas-produto {
+    gap: 7px;
+    margin-top: 8px;
+    padding-bottom: 2px;
+}
+
+.miniatura {
+    width: 52px;
+    height: 62px;
+    border-radius: 8px;
+}
+
+/* Card de informações */
+.detalhe-informacoes {
+    position: static;
+    padding: 15px 17px;
+    border-radius: 15px;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.04);
+}
+
+/* Categoria */
+.detalhe-informacoes .produto-categoria {
+    font-size: 9px;
+    margin-bottom: 4px;
+    letter-spacing: 0.8px;
+}
+
+/* Nome */
+.detalhe-informacoes h2 {
+    font-size: 23px;
+    line-height: 1.15;
+    margin: 4px 0 7px;
+}
+
+/* Preço normal */
+.preco-detalhe {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+/* Preço promocional */
+.preco-detalhe-promocao {
+    gap: 7px;
+    margin-bottom: 10px;
+}
+
+.preco-detalhe-original {
+    font-size: 13px;
+}
+
+.preco-detalhe-promocional {
+    font-size: 22px;
+}
+
+/* Blocos: tamanhos, cores, quantidade e descrição */
+.bloco-detalhe {
+    padding: 10px 0;
+}
+
+.bloco-detalhe h3 {
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.bloco-detalhe p {
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+/* Tamanhos */
+.tamanhos {
+    gap: 7px;
+}
+
+.tamanhos button {
+    min-width: 40px;
+    height: 34px;
+    padding: 0 9px;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+/* Cores */
+.cores {
+    gap: 7px;
+}
+
+.cores button {
+    min-width: 56px;
+    height: 34px;
+    padding: 0 10px;
+    border-radius: 8px;
+    font-size: 11px;
+}
+
+/* Quantidade */
+.quantidade-produto {
+    border-radius: 8px;
+}
+
+.quantidade-produto button {
+    width: 34px;
+    height: 34px;
+    font-size: 17px;
+}
+
+.quantidade-produto span {
+    min-width: 38px;
+    font-size: 12px;
+}
+
+/* Botão principal */
+.botao-adicionar-carrinho {
+    margin-top: 12px;
+    padding: 11px 14px;
+    border-radius: 9px;
+    font-size: 13px;
+}
+
+/* Mensagem */
+.mensagem-carrinho {
+    margin-top: 8px;
+    padding: 9px;
+    font-size: 12px;
+}
+
+/* Rodapé mais próximo da página do produto */
+.produto-pagina + .rodape {
+    margin-top: 6px;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .produto-pagina {
+        max-width: 820px;
+    }
+
+    .detalhe-produto {
+        grid-template-columns: minmax(0, 1fr) minmax(300px, 0.9fr);
+        gap: 18px;
+    }
+
+    .detalhe-imagem {
+        height: 400px;
+        max-height: 400px;
+    }
+
+    .detalhe-informacoes h2 {
+        font-size: 21px;
+    }
+
+}
+
+
+/* =====================================================
+   CELULAR
+===================================================== */
+
+@media (max-width: 750px) {
+
+    .produto-pagina {
+        max-width: 100%;
+        padding: 14px 12px 24px;
+    }
+
+    .voltar {
+        margin-bottom: 12px;
+        font-size: 13px;
+    }
+
+    .detalhe-produto {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .galeria-produto {
+        max-width: 100%;
+    }
+
+    .detalhe-imagem {
+        width: 100%;
+        height: auto;
+        max-height: none;
+        aspect-ratio: 4 / 5;
+        border-radius: 14px;
+    }
+
+    .detalhe-imagem img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .miniatura {
+        width: 48px;
+        height: 58px;
+    }
+
+    .detalhe-informacoes {
+        padding: 14px;
+        border-radius: 14px;
+    }
+
+    .detalhe-informacoes h2 {
+        font-size: 21px;
+    }
+
+    .preco-detalhe,
+    .preco-detalhe-promocional {
+        font-size: 21px;
+    }
+
+    .bloco-detalhe {
+        padding: 9px 0;
+    }
+
+}
+
+
+/* =====================================================
+   CELULAR PEQUENO
+===================================================== */
+
+@media (max-width: 480px) {
+
+    .produto-pagina {
+        padding: 12px 10px 22px;
+    }
+
+    .detalhe-informacoes {
+        padding: 13px;
+    }
+
+    .detalhe-informacoes h2 {
+        font-size: 20px;
+    }
+
+    .bloco-detalhe h3 {
+        font-size: 12px;
+    }
+
+    .botao-adicionar-carrinho {
+        font-size: 12px;
+        padding: 10px 12px;
+    }
+
+}/* =====================================================
+   BOTÃO VOLTAR - PÁGINA DO PRODUTO
+===================================================== */
+
+.voltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    margin-bottom: 14px;
+    padding: 8px 13px;
+
+    background: #ffffff;
+    color: #111111;
+
+    border: 1px solid #dddddd;
+    border-radius: 9px;
+
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.04);
+
+    transition: all 0.2s ease;
+}
+
+.voltar:hover {
+    background: #111111;
+    color: #ffffff;
+    border-color: #111111;
+    transform: translateX(-2px);
+}

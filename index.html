@@ -18,20 +18,32 @@
 
     <header class="topo">
 
+        <div class="barra-superior">
+            <div class="barra-superior-conteudo">
+                <span>Moda masculina</span>
+                <span class="barra-ponto">•</span>
+                <span>Peças selecionadas</span>
+                <span class="barra-ponto">•</span>
+                <span>Atendimento pelo WhatsApp</span>
+            </div>
+        </div>
+
         <div class="topo-conteudo">
 
-            <div class="marca">
+            <nav class="menu-principal" aria-label="Navegação principal">
+                <a href="#inicio">Início</a>
+                <a href="#produtos">Produtos</a>
+                <a href="#categorias">Categorias</a>
+                <a href="#contato">Contato</a>
+            </nav>
 
+            <a href="index.html" class="marca" aria-label="Ir para o início">
                 <img
                     src="imagens/logo-nova-era-reis.png"
                     alt="Nova Era Reis Multimarcas"
                     class="logo-site"
                 >
-
-            </div>
-
-
-            <!-- CARRINHO -->
+            </a>
 
             <button
                 type="button"
@@ -71,15 +83,79 @@
 
         <!-- APRESENTAÇÃO -->
 
-        <section class="apresentacao">
+        <section class="apresentacao apresentacao-premium" id="inicio">
 
-            <h2>
-                Vista seu estilo.
-            </h2>
+            <div class="hero-conteudo">
 
-            <p>
-                Peças selecionadas para quem exige qualidade.
-            </p>
+                <span class="hero-etiqueta">
+                    NOVA ERA REIS MULTIMARCAS
+                </span>
+
+                <h1>
+                    Vista seu estilo.<br>
+                    <span>Marque presença.</span>
+                </h1>
+
+                <p>
+                    Peças selecionadas para quem busca qualidade,
+                    personalidade e um visual que combina com cada ocasião.
+                </p>
+
+                <div class="hero-acoes">
+
+                    <a
+                        href="#produtos"
+                        class="hero-botao hero-botao-principal"
+                    >
+                        Ver produtos
+                    </a>
+
+                    <a
+                        href="https://wa.me/5521979767849?text=Ol%C3%A1%21%20Vim%20pelo%20cat%C3%A1logo%20da%20Nova%20Era%20Reis."
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="hero-botao hero-botao-secundario"
+                    >
+                        Falar no WhatsApp
+                    </a>
+
+                </div>
+
+                <div class="hero-diferenciais">
+
+                    <div>
+                        <strong>Multimarcas</strong>
+                        <span>Seleção de peças</span>
+                    </div>
+
+                    <div>
+                        <strong>Praticidade</strong>
+                        <span>Escolha pelo catálogo</span>
+                    </div>
+
+                    <div>
+                        <strong>Atendimento</strong>
+                        <span>Pedido pelo WhatsApp</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="hero-visual hero-visual-abstrato" aria-hidden="true">
+
+                <div class="grafismo-orbita grafismo-orbita-1"></div>
+                <div class="grafismo-orbita grafismo-orbita-2"></div>
+                <div class="grafismo-orbita grafismo-orbita-3"></div>
+
+                <div class="grafismo-linha grafismo-linha-1"></div>
+                <div class="grafismo-linha grafismo-linha-2"></div>
+                <div class="grafismo-linha grafismo-linha-3"></div>
+
+                <div class="grafismo-ponto grafismo-ponto-1"></div>
+                <div class="grafismo-ponto grafismo-ponto-2"></div>
+
+            </div>
 
         </section>
 
@@ -176,7 +252,7 @@
              CATEGORIAS
         ========================== -->
 
-        <section class="secao-categorias">
+        <section class="secao-categorias" id="categorias">
 
             <div class="titulo-secao">
 
@@ -240,7 +316,7 @@
              PRODUTOS
         ========================== -->
 
-        <section class="secao-produtos">
+        <section class="secao-produtos" id="produtos">
 
             <div class="titulo-secao">
 
@@ -410,7 +486,14 @@
          RODAPÉ
     ========================== -->
 
-    <footer class="rodape">
+    <footer class="rodape" id="contato">
+
+        <img
+            src="imagens/logo-nova-era-reis.png"
+            alt=""
+            class="rodape-marca-dagua"
+            aria-hidden="true"
+        >
 
         <div class="rodape-conteudo">
 
