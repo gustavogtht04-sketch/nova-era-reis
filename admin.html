@@ -57,6 +57,35 @@
 
     <main class="container-admin">
 
+        <!-- =========================
+             NAVEGAÇÃO DO PAINEL
+        ========================== -->
+
+        <nav class="admin-abas" aria-label="Áreas do painel">
+
+            <button
+                id="abaProdutos"
+                class="admin-aba ativa"
+                type="button"
+            >
+                Produtos
+            </button>
+
+            <button
+                id="abaPedidos"
+                class="admin-aba"
+                type="button"
+            >
+                Pedidos
+                <span id="contadorPedidosNovos" class="contador-pedidos oculto">0</span>
+            </button>
+
+        </nav>
+
+
+        <section id="painelProdutos">
+
+
 
         <!-- CABEÇALHO DOS PRODUTOS -->
 
@@ -98,6 +127,105 @@
 
             <div id="produtosAdmin">
             </div>
+
+        </section>
+
+        </section>
+
+
+        <!-- =========================
+             PAINEL DE PEDIDOS
+        ========================== -->
+
+        <section id="painelPedidos" class="painel-pedidos oculto">
+
+            <section class="cabecalho-pedidos">
+
+                <div>
+                    <span class="admin-secao-etiqueta">ATENDIMENTO</span>
+                    <h2>Pedidos</h2>
+                    <p>
+                        Acompanhe os pedidos enviados para o WhatsApp e registre o resultado do atendimento.
+                    </p>
+                </div>
+
+                <button
+                    id="btnAtualizarPedidos"
+                    class="btn-secundario"
+                    type="button"
+                >
+                    Atualizar
+                </button>
+
+            </section>
+
+
+            <section class="resumo-pedidos">
+
+                <article class="resumo-pedido-card">
+                    <span>Novos</span>
+                    <strong id="resumoPedidosNovos">0</strong>
+                </article>
+
+                <article class="resumo-pedido-card">
+                    <span>Concluídos</span>
+                    <strong id="resumoPedidosConcluidos">0</strong>
+                </article>
+
+                <article class="resumo-pedido-card">
+                    <span>Não concluídos</span>
+                    <strong id="resumoPedidosNaoConcluidos">0</strong>
+                </article>
+
+                <article class="resumo-pedido-card">
+                    <span>Valor concluído</span>
+                    <strong id="resumoValorConcluido">R$ 0,00</strong>
+                </article>
+
+            </section>
+
+
+            <section class="filtros-pedidos">
+
+                <div class="filtro-pedido-grupo">
+                    <label for="filtroMesAnoPedido">Mês/Ano</label>
+                    <input
+                        type="month"
+                        id="filtroMesAnoPedido"
+                        aria-label="Filtrar pedidos por mês e ano"
+                    >
+                </div>
+
+                <div class="filtro-pedido-grupo">
+                    <label for="filtroStatusPedido">Status</label>
+                    <select id="filtroStatusPedido" aria-label="Filtrar pedidos por status">
+                        <option value="todos">Todos os pedidos</option>
+                        <option value="novo">Novos</option>
+                        <option value="concluido">Concluídos</option>
+                        <option value="nao_concluido">Não concluídos</option>
+                    </select>
+                </div>
+
+                <button
+                    id="btnLimparFiltrosPedidos"
+                    class="btn-limpar-filtros-pedidos"
+                    type="button"
+                >
+                    Limpar filtros
+                </button>
+
+            </section>
+
+
+            <section class="lista-pedidos-admin">
+
+                <div id="carregandoPedidos" class="carregando-pedidos">
+                    Carregando pedidos...
+                </div>
+
+                <div id="pedidosAdmin"></div>
+
+            </section>
 
         </section>
 
@@ -426,6 +554,41 @@
                     </div>
 
                 </form>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             DETALHES DO PEDIDO
+        ========================== -->
+
+        <section
+            id="areaDetalhesPedido"
+            class="area-formulario oculto"
+        >
+
+            <div class="detalhes-pedido-modal">
+
+                <div class="titulo-formulario">
+
+                    <div>
+                        <span class="admin-secao-etiqueta">PEDIDO</span>
+                        <h2 id="tituloDetalhesPedido">Detalhes do pedido</h2>
+                    </div>
+
+                    <button
+                        id="btnFecharDetalhesPedido"
+                        type="button"
+                        aria-label="Fechar detalhes do pedido"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+                <div id="conteudoDetalhesPedido"></div>
 
             </div>
 

@@ -42,6 +42,21 @@
             text-transform: uppercase;
         }
 
+        .pedido-status.status-novo {
+            background: #111111;
+            color: #ffffff;
+        }
+
+        .pedido-status.status-concluido {
+            background: #15803d;
+            color: #ffffff;
+        }
+
+        .pedido-status.status-nao-concluido {
+            background: #b91c1c;
+            color: #ffffff;
+        }
+
         .pedido-lista {
             display: flex;
             flex-direction: column;
@@ -52,22 +67,17 @@
             display: grid;
             grid-template-columns: 140px 1fr;
             gap: 18px;
-
             border: 1px solid #e1e1e1;
             border-radius: 16px;
-
             background: white;
-
             padding: 14px;
         }
 
         .pedido-item-imagem {
             width: 140px;
             height: 160px;
-
             border-radius: 12px;
             overflow: hidden;
-
             background: #f3f3f3;
         }
 
@@ -122,15 +132,11 @@
 
         .pedido-resumo {
             margin-top: 28px;
-
             border-top: 1px solid #ddd;
-
             padding-top: 24px;
-
             display: flex;
             justify-content: space-between;
             align-items: center;
-
             gap: 20px;
         }
 
@@ -155,7 +161,6 @@
         }
 
         @media (max-width: 650px) {
-
             .pagina-pedido {
                 padding: 24px 16px 40px;
             }
@@ -190,7 +195,6 @@
             .pedido-total {
                 font-size: 24px;
             }
-
         }
     </style>
 </head>
@@ -198,127 +202,62 @@
 <body>
 
     <header class="topo">
-
         <div class="topo-conteudo">
-
             <div class="marca">
-
                 <a href="index.html">
-
                     <img
                         src="imagens/logo-nova-era-reis.png"
                         alt="Nova Era Reis Multimarcas"
                         class="logo-site"
                     >
-
                 </a>
-
             </div>
-
         </div>
-
     </header>
-
 
     <main class="pagina-pedido">
 
-        <div
-            id="pedidoCarregando"
-            class="pedido-carregando"
-        >
+        <div id="pedidoCarregando" class="pedido-carregando">
             Carregando pedido...
         </div>
 
-
-        <div
-            id="pedidoConteudo"
-            style="display:none;"
-        >
+        <div id="pedidoConteudo" style="display:none;">
 
             <section class="pedido-cabecalho">
+                <h1>Pedido</h1>
 
-                <h1>
-                    Pedido
-                </h1>
+                <p id="pedidoCodigo" class="pedido-codigo"></p>
 
-                <p
-                    id="pedidoCodigo"
-                    class="pedido-codigo"
-                ></p>
-
-                <span
-                    id="pedidoStatus"
-                    class="pedido-status"
-                ></span>
-
+                <span id="pedidoStatus" class="pedido-status"></span>
             </section>
 
-
-            <section
-                id="pedidoLista"
-                class="pedido-lista"
-            >
-            </section>
-
+            <section id="pedidoLista" class="pedido-lista"></section>
 
             <section class="pedido-resumo">
-
                 <div class="pedido-resumo-info">
-
-                    <p>
-                        Quantidade de itens
-                    </p>
-
-                    <strong id="pedidoQuantidade">
-                        0
-                    </strong>
-
+                    <p>Quantidade de itens</p>
+                    <strong id="pedidoQuantidade">0</strong>
                 </div>
-
 
                 <div>
-
-                    <p>
-                        Total do pedido
-                    </p>
-
-                    <div
-                        id="pedidoTotal"
-                        class="pedido-total"
-                    >
+                    <p>Total do pedido</p>
+                    <div id="pedidoTotal" class="pedido-total">
                         R$ 0,00
                     </div>
-
                 </div>
-
             </section>
 
         </div>
 
-
-        <div
-            id="pedidoErro"
-            class="pedido-erro"
-            style="display:none;"
-        >
-
-            <h2>
-                Pedido não encontrado
-            </h2>
-
-            <p>
-                Não foi possível localizar este pedido.
-            </p>
-
+        <div id="pedidoErro" class="pedido-erro" style="display:none;">
+            <h2>Pedido não encontrado</h2>
+            <p>Não foi possível localizar este pedido.</p>
         </div>
 
     </main>
 
-
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
     <script src="supabase.js"></script>
-
     <script src="pedido.js"></script>
 
 </body>

@@ -109,7 +109,13 @@ function formatarStatusPedido(
             "Entregue",
 
         cancelado:
-            "Cancelado"
+            "Cancelado",
+
+        concluido:
+            "Concluído",
+
+        nao_concluido:
+            "Não concluído"
 
     };
 
@@ -117,6 +123,55 @@ function formatarStatusPedido(
     return nomes[status] ||
         status ||
         "Novo";
+
+}
+
+
+/* =====================================================
+   CLASSE VISUAL DO STATUS
+===================================================== */
+
+function aplicarClasseStatusPedido(
+    status
+) {
+
+    if (!pedidoStatus) {
+        return;
+    }
+
+
+    pedidoStatus.classList.remove(
+        "status-novo",
+        "status-concluido",
+        "status-nao-concluido"
+    );
+
+
+    if (status === "concluido") {
+
+        pedidoStatus.classList.add(
+            "status-concluido"
+        );
+
+        return;
+
+    }
+
+
+    if (status === "nao_concluido") {
+
+        pedidoStatus.classList.add(
+            "status-nao-concluido"
+        );
+
+        return;
+
+    }
+
+
+    pedidoStatus.classList.add(
+        "status-novo"
+    );
 
 }
 
@@ -424,6 +479,11 @@ async function carregarPedido() {
             formatarStatusPedido(
                 pedido.status
             );
+
+
+        aplicarClasseStatusPedido(
+            pedido.status
+        );
 
 
         /* =============================================

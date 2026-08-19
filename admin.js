@@ -1781,7 +1781,10 @@ async function liberarPainel() {
         "block";
 
 
-    await carregarProdutos();
+    await Promise.all([
+        carregarProdutos(),
+        carregarPedidos()
+    ]);
 
 }
 
@@ -1801,6 +1804,10 @@ btnSair.addEventListener(
 
         produtosAdmin.innerHTML =
             "";
+
+        if (pedidosAdmin) {
+            pedidosAdmin.innerHTML = "";
+        }
 
 
         telaLogin.style.display =
@@ -1831,6 +1838,1183 @@ areaFormulario.addEventListener(
 
             fecharFormulario();
 
+        }
+
+    }
+);
+
+
+
+
+/* =====================================================
+   PEDIDOS - ELEMENTOS
+===================================================== */
+
+const abaProdutos =
+    document.getElementById("abaProdutos");
+
+const abaPedidos =
+    document.getElementById("abaPedidos");
+
+const painelProdutos =
+    document.getElementById("painelProdutos");
+
+const painelPedidos =
+    document.getElementById("painelPedidos");
+
+const contadorPedidosNovos =
+    document.getElementById("contadorPedidosNovos");
+
+const btnAtualizarPedidos =
+    document.getElementById("btnAtualizarPedidos");
+
+const filtroStatusPedido =
+    document.getElementById("filtroStatusPedido");
+
+const filtroMesAnoPedido =
+    document.getElementById("filtroMesAnoPedido");
+
+const btnLimparFiltrosPedidos =
+    document.getElementById("btnLimparFiltrosPedidos");
+
+const carregandoPedidos =
+    document.getElementById("carregandoPedidos");
+
+const pedidosAdmin =
+    document.getElementById("pedidosAdmin");
+
+const resumoPedidosNovos =
+    document.getElementById("resumoPedidosNovos");
+
+const resumoPedidosConcluidos =
+    document.getElementById("resumoPedidosConcluidos");
+
+const resumoPedidosNaoConcluidos =
+    document.getElementById("resumoPedidosNaoConcluidos");
+
+const resumoValorConcluido =
+    document.getElementById("resumoValorConcluido");
+
+const areaDetalhesPedido =
+    document.getElementById("areaDetalhesPedido");
+
+const tituloDetalhesPedido =
+    document.getElementById("tituloDetalhesPedido");
+
+const conteudoDetalhesPedido =
+    document.getElementById("conteudoDetalhesPedido");
+
+const btnFecharDetalhesPedido =
+    document.getElementById("btnFecharDetalhesPedido");
+
+
+let pedidosCarregados = [];
+
+
+/* =====================================================
+   PEDIDOS - FORMATAÇÕES
+===================================================== */
+
+function formatarDataPedidoAdmin(valor) {
+
+    if (!valor) {
+        return "";
+    }
+
+    const data =
+        new Date(valor);
+
+    if (
+        Number.isNaN(
+            data.getTime()
+        )
+    ) {
+        return "";
+    }
+
+    return data.toLocaleString(
+        "pt-BR",
+        {
+            dateStyle: "short",
+            timeStyle: "short"
+        }
+    );
+
+}
+
+
+function nomeStatusPedidoAdmin(status) {
+
+    const nomes = {
+        novo: "Novo",
+        concluido: "Concluído",
+        nao_concluido: "Não concluído"
+    };
+
+    return nomes[status] ||
+        status ||
+        "Novo";
+
+}
+
+
+function classeStatusPedidoAdmin(status) {
+
+    if (status === "concluido") {
+        return "pedido-status-concluido";
+    }
+
+    if (status === "nao_concluido") {
+        return "pedido-status-nao-concluido";
+    }
+
+    return "pedido-status-novo";
+
+}
+
+
+/* =====================================================
+   ABAS DO PAINEL
+===================================================== */
+
+function abrirAbaAdmin(aba) {
+
+    const mostrarPedidos =
+        aba === "pedidos";
+
+    painelProdutos
+        ?.classList
+        .toggle(
+            "oculto",
+            mostrarPedidos
+        );
+
+    painelPedidos
+        ?.classList
+        .toggle(
+            "oculto",
+            !mostrarPedidos
+        );
+
+    abaProdutos
+        ?.classList
+        .toggle(
+            "ativa",
+            !mostrarPedidos
+        );
+
+    abaPedidos
+        ?.classList
+        .toggle(
+            "ativa",
+            mostrarPedidos
+        );
+
+}
+
+
+abaProdutos?.addEventListener(
+    "click",
+    () => {
+        abrirAbaAdmin("produtos");
+    }
+);
+
+
+abaPedidos?.addEventListener(
+    "click",
+    () => {
+        abrirAbaAdmin("pedidos");
+        renderizarPedidosAdmin();
+    }
+);
+
+
+/* =====================================================
+   CARREGAR PEDIDOS
+===================================================== */
+
+async function carregarPedidos() {
+
+    if (!pedidosAdmin) {
+        return;
+    }
+
+    carregandoPedidos.style.display =
+        "block";
+
+    carregandoPedidos.textContent =
+        "Carregando pedidos...";
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+            .from("pedidos")
+            .select(
+                "id, codigo, total, quantidade_itens, status, created_at"
+            )
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
+            );
+
+    if (error) {
+
+        console.error(
+            "Erro ao carregar pedidos:",
+            error
+        );
+
+        carregandoPedidos.textContent =
+            "Não foi possível carregar os pedidos.";
+
+        return;
+    }
+
+    pedidosCarregados =
+        data || [];
+
+    carregandoPedidos.style.display =
+        "none";
+
+    atualizarResumoPedidos();
+
+    renderizarPedidosAdmin();
+
+}
+
+
+/* =====================================================
+   FILTRO DE MÊS / ANO
+===================================================== */
+
+function pedidoPertenceAoMesAno(
+    pedido,
+    mesAno
+) {
+
+    if (!mesAno) {
+        return true;
+    }
+
+    if (!pedido?.created_at) {
+        return false;
+    }
+
+    const data =
+        new Date(
+            pedido.created_at
+        );
+
+    if (
+        Number.isNaN(
+            data.getTime()
+        )
+    ) {
+        return false;
+    }
+
+    const ano =
+        data.getFullYear();
+
+    const mes =
+        String(
+            data.getMonth() + 1
+        ).padStart(
+            2,
+            "0"
+        );
+
+    return `${ano}-${mes}` === mesAno;
+
+}
+
+
+function obterPedidosDoPeriodo() {
+
+    const mesAno =
+        filtroMesAnoPedido?.value ||
+        "";
+
+    return pedidosCarregados.filter(
+        pedido =>
+            pedidoPertenceAoMesAno(
+                pedido,
+                mesAno
+            )
+    );
+
+}
+
+
+/* =====================================================
+   RESUMO DOS PEDIDOS
+===================================================== */
+
+function atualizarResumoPedidos() {
+
+    const pedidosDoPeriodo =
+        obterPedidosDoPeriodo();
+
+    const novos =
+        pedidosDoPeriodo.filter(
+            pedido =>
+                (pedido.status || "novo") ===
+                "novo"
+        );
+
+    const concluidos =
+        pedidosDoPeriodo.filter(
+            pedido =>
+                pedido.status ===
+                "concluido"
+        );
+
+    const naoConcluidos =
+        pedidosDoPeriodo.filter(
+            pedido =>
+                pedido.status ===
+                "nao_concluido"
+        );
+
+    const valorConcluido =
+        concluidos.reduce(
+            (
+                total,
+                pedido
+            ) =>
+                total +
+                Number(
+                    pedido.total || 0
+                ),
+            0
+        );
+
+    if (resumoPedidosNovos) {
+        resumoPedidosNovos.textContent =
+            novos.length;
+    }
+
+    if (resumoPedidosConcluidos) {
+        resumoPedidosConcluidos.textContent =
+            concluidos.length;
+    }
+
+    if (resumoPedidosNaoConcluidos) {
+        resumoPedidosNaoConcluidos.textContent =
+            naoConcluidos.length;
+    }
+
+    if (resumoValorConcluido) {
+        resumoValorConcluido.textContent =
+            formatarPreco(
+                valorConcluido
+            );
+    }
+
+    if (contadorPedidosNovos) {
+
+        const novosGerais =
+            pedidosCarregados.filter(
+                pedido =>
+                    (pedido.status || "novo") ===
+                    "novo"
+            );
+
+        contadorPedidosNovos.textContent =
+            novosGerais.length;
+
+        contadorPedidosNovos.classList.toggle(
+            "oculto",
+            novosGerais.length === 0
+        );
+    }
+
+}
+
+
+/* =====================================================
+   FILTRAR / RENDERIZAR PEDIDOS
+===================================================== */
+
+function renderizarPedidosAdmin() {
+
+    if (!pedidosAdmin) {
+        return;
+    }
+
+    const filtro =
+        filtroStatusPedido?.value ||
+        "todos";
+
+    const pedidosDoPeriodo =
+        obterPedidosDoPeriodo();
+
+    const lista =
+        filtro === "todos"
+            ? pedidosDoPeriodo
+            : pedidosDoPeriodo.filter(
+                pedido =>
+                    (pedido.status || "novo") ===
+                    filtro
+            );
+
+    if (lista.length === 0) {
+
+        pedidosAdmin.innerHTML = `
+
+            <div class="pedidos-vazio">
+
+                <h3>
+                    Nenhum pedido encontrado
+                </h3>
+
+                <p>
+                    Não há pedidos para o filtro selecionado.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+    pedidosAdmin.innerHTML =
+        lista
+            .map(
+                criarHtmlPedidoAdmin
+            )
+            .join("");
+
+}
+
+
+function criarHtmlPedidoAdmin(pedido) {
+
+    const status =
+        pedido.status ||
+        "novo";
+
+    const statusNome =
+        nomeStatusPedidoAdmin(
+            status
+        );
+
+    const statusClasse =
+        classeStatusPedidoAdmin(
+            status
+        );
+
+    return `
+
+        <article
+            class="pedido-admin-card"
+            data-id="${pedido.id}"
+        >
+
+            <div class="pedido-admin-principal">
+
+                <div class="pedido-admin-identificacao">
+
+                    <span class="pedido-admin-codigo">
+                        ${pedido.codigo}
+                    </span>
+
+                    <span
+                        class="pedido-admin-status ${statusClasse}"
+                    >
+                        ${statusNome}
+                    </span>
+
+                </div>
+
+                <p class="pedido-admin-data">
+                    ${formatarDataPedidoAdmin(
+                        pedido.created_at
+                    )}
+                </p>
+
+            </div>
+
+
+            <div class="pedido-admin-metricas">
+
+                <div>
+                    <span>Itens</span>
+                    <strong>
+                        ${pedido.quantidade_itens || 0}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Total</span>
+                    <strong>
+                        ${formatarPreco(
+                            pedido.total || 0
+                        )}
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <div class="pedido-admin-acoes">
+
+                <button
+                    type="button"
+                    class="btn-pedido-detalhes"
+                    data-id="${pedido.id}"
+                >
+                    Ver detalhes
+                </button>
+
+                <button
+                    type="button"
+                    class="btn-pedido-excluir"
+                    data-id="${pedido.id}"
+                >
+                    Excluir
+                </button>
+
+                ${
+                    status !== "concluido"
+                        ? `
+                            <button
+                                type="button"
+                                class="btn-pedido-concluir"
+                                data-id="${pedido.id}"
+                            >
+                                Concluir
+                            </button>
+                          `
+                        : ""
+                }
+
+                ${
+                    status !== "nao_concluido"
+                        ? `
+                            <button
+                                type="button"
+                                class="btn-pedido-nao-concluir"
+                                data-id="${pedido.id}"
+                            >
+                                Não concluiu
+                            </button>
+                          `
+                        : ""
+                }
+
+                ${
+                    status !== "novo"
+                        ? `
+                            <button
+                                type="button"
+                                class="btn-pedido-reabrir"
+                                data-id="${pedido.id}"
+                            >
+                                Reabrir
+                            </button>
+                          `
+                        : ""
+                }
+
+            </div>
+
+        </article>
+
+    `;
+
+}
+
+
+/* =====================================================
+   ALTERAR STATUS DO PEDIDO
+===================================================== */
+
+async function alterarStatusPedido(
+    id,
+    novoStatus
+) {
+
+    const pedido =
+        pedidosCarregados.find(
+            item =>
+                Number(item.id) ===
+                Number(id)
+        );
+
+    if (!pedido) {
+        return;
+    }
+
+    const mensagens = {
+        concluido:
+            "Marcar este pedido como concluído?",
+        nao_concluido:
+            "Marcar este pedido como não concluído?",
+        novo:
+            "Reabrir este pedido e voltar o status para Novo?"
+    };
+
+    const confirmou =
+        window.confirm(
+            mensagens[novoStatus] ||
+            "Alterar o status deste pedido?"
+        );
+
+    if (!confirmou) {
+        return;
+    }
+
+    const {
+        error
+    } =
+        await supabaseClient
+            .from("pedidos")
+            .update({
+                status:
+                    novoStatus
+            })
+            .eq(
+                "id",
+                Number(id)
+            );
+
+    if (error) {
+
+        console.error(
+            "Erro ao alterar status do pedido:",
+            error
+        );
+
+        alert(
+            "Não foi possível atualizar o pedido."
+        );
+
+        return;
+    }
+
+    pedido.status =
+        novoStatus;
+
+    atualizarResumoPedidos();
+
+    renderizarPedidosAdmin();
+
+}
+
+
+/* =====================================================
+   EXCLUIR PEDIDO
+===================================================== */
+
+async function excluirPedidoAdmin(
+    id
+) {
+
+    const pedido =
+        pedidosCarregados.find(
+            item =>
+                Number(item.id) ===
+                Number(id)
+        );
+
+    if (!pedido) {
+        return;
+    }
+
+    const confirmou =
+        window.confirm(
+            `Tem certeza que deseja excluir o pedido ${pedido.codigo}?\n\nEssa ação não poderá ser desfeita.`
+        );
+
+    if (!confirmou) {
+        return;
+    }
+
+    /*
+       Primeiro removemos os itens ligados ao pedido.
+       Depois removemos o pedido principal.
+    */
+
+    const { error: erroItens } =
+        await supabaseClient
+            .from("itens_pedido")
+            .delete()
+            .eq(
+                "pedido_id",
+                Number(id)
+            );
+
+    if (erroItens) {
+
+        console.error(
+            "Erro ao excluir itens do pedido:",
+            erroItens
+        );
+
+        alert(
+            "Não foi possível excluir os itens deste pedido."
+        );
+
+        return;
+    }
+
+    const { error: erroPedido } =
+        await supabaseClient
+            .from("pedidos")
+            .delete()
+            .eq(
+                "id",
+                Number(id)
+            );
+
+    if (erroPedido) {
+
+        console.error(
+            "Erro ao excluir pedido:",
+            erroPedido
+        );
+
+        alert(
+            "Os itens foram removidos, mas não foi possível excluir o pedido. Tente novamente."
+        );
+
+        await carregarPedidos();
+
+        return;
+    }
+
+    pedidosCarregados =
+        pedidosCarregados.filter(
+            item =>
+                Number(item.id) !==
+                Number(id)
+        );
+
+    atualizarResumoPedidos();
+
+    renderizarPedidosAdmin();
+
+    alert(
+        "Pedido excluído com sucesso!"
+    );
+
+}
+
+
+/* =====================================================
+   DETALHES DO PEDIDO
+===================================================== */
+
+async function abrirDetalhesPedido(
+    id
+) {
+
+    const pedido =
+        pedidosCarregados.find(
+            item =>
+                Number(item.id) ===
+                Number(id)
+        );
+
+    if (
+        !pedido ||
+        !areaDetalhesPedido ||
+        !conteudoDetalhesPedido
+    ) {
+        return;
+    }
+
+    tituloDetalhesPedido.textContent =
+        pedido.codigo;
+
+    conteudoDetalhesPedido.innerHTML =
+        `
+            <div class="pedido-detalhe-carregando">
+                Carregando itens...
+            </div>
+        `;
+
+    areaDetalhesPedido.classList.remove(
+        "oculto"
+    );
+
+    const {
+        data: itens,
+        error
+    } =
+        await supabaseClient
+            .from("itens_pedido")
+            .select("*")
+            .eq(
+                "pedido_id",
+                Number(id)
+            )
+            .order(
+                "id",
+                {
+                    ascending: true
+                }
+            );
+
+    if (error) {
+
+        console.error(
+            "Erro ao carregar itens do pedido:",
+            error
+        );
+
+        conteudoDetalhesPedido.innerHTML =
+            `
+                <div class="pedido-detalhe-erro">
+                    Não foi possível carregar os itens.
+                </div>
+            `;
+
+        return;
+    }
+
+    const htmlItens =
+        (itens || [])
+            .map(
+                item => {
+
+                    const precoOriginal =
+                        Number(
+                            item.preco_original || 0
+                        );
+
+                    const precoFinal =
+                        Number(
+                            item.preco_final || 0
+                        );
+
+                    const promocao =
+                        precoOriginal >
+                        precoFinal;
+
+                    return `
+
+                        <article class="pedido-detalhe-item">
+
+                            <div class="pedido-detalhe-imagem">
+
+                                ${
+                                    item.imagem
+                                        ? `
+                                            <img
+                                                src="${item.imagem}"
+                                                alt="${item.nome}"
+                                            >
+                                          `
+                                        : `
+                                            <span>Sem foto</span>
+                                          `
+                                }
+
+                            </div>
+
+                            <div class="pedido-detalhe-info">
+
+                                <h3>
+                                    ${item.nome}
+                                </h3>
+
+                                ${
+                                    item.tamanho
+                                        ? `
+                                            <p>
+                                                Tamanho: ${item.tamanho}
+                                            </p>
+                                          `
+                                        : ""
+                                }
+
+                                ${
+                                    item.cor
+                                        ? `
+                                            <p>
+                                                Cor: ${item.cor}
+                                            </p>
+                                          `
+                                        : ""
+                                }
+
+                                <p>
+                                    Quantidade:
+                                    <strong>
+                                        ${item.quantidade}
+                                    </strong>
+                                </p>
+
+                                <div class="pedido-detalhe-preco">
+
+                                    ${
+                                        promocao
+                                            ? `
+                                                <span class="pedido-detalhe-original">
+                                                    ${formatarPreco(
+                                                        precoOriginal
+                                                    )}
+                                                </span>
+                                              `
+                                            : ""
+                                    }
+
+                                    <strong>
+                                        ${formatarPreco(
+                                            precoFinal
+                                        )}
+                                    </strong>
+
+                                </div>
+
+                                <p class="pedido-detalhe-subtotal">
+                                    Subtotal:
+                                    <strong>
+                                        ${formatarPreco(
+                                            item.subtotal || 0
+                                        )}
+                                    </strong>
+                                </p>
+
+                            </div>
+
+                        </article>
+
+                    `;
+
+                }
+            )
+            .join("");
+
+    const linkPublico =
+        `pedido.html?codigo=${encodeURIComponent(
+            pedido.codigo
+        )}`;
+
+    conteudoDetalhesPedido.innerHTML = `
+
+        <div class="pedido-detalhe-resumo">
+
+            <div>
+                <span>Status</span>
+                <strong>
+                    ${nomeStatusPedidoAdmin(
+                        pedido.status
+                    )}
+                </strong>
+            </div>
+
+            <div>
+                <span>Data</span>
+                <strong>
+                    ${formatarDataPedidoAdmin(
+                        pedido.created_at
+                    )}
+                </strong>
+            </div>
+
+            <div>
+                <span>Total</span>
+                <strong>
+                    ${formatarPreco(
+                        pedido.total || 0
+                    )}
+                </strong>
+            </div>
+
+        </div>
+
+
+        <div class="pedido-detalhe-lista">
+
+            ${htmlItens}
+
+        </div>
+
+
+        <div class="pedido-detalhe-rodape">
+
+            <a
+                href="${linkPublico}"
+                target="_blank"
+                class="btn-ver-pedido-publico"
+            >
+                Abrir página do pedido
+            </a>
+
+        </div>
+
+    `;
+
+}
+
+
+function fecharDetalhesPedido() {
+
+    areaDetalhesPedido
+        ?.classList
+        .add(
+            "oculto"
+        );
+
+    if (conteudoDetalhesPedido) {
+        conteudoDetalhesPedido.innerHTML = "";
+    }
+
+}
+
+
+/* =====================================================
+   EVENTOS DOS PEDIDOS
+===================================================== */
+
+filtroStatusPedido?.addEventListener(
+    "change",
+    renderizarPedidosAdmin
+);
+
+
+filtroMesAnoPedido?.addEventListener(
+    "change",
+    () => {
+        atualizarResumoPedidos();
+        renderizarPedidosAdmin();
+    }
+);
+
+
+btnLimparFiltrosPedidos?.addEventListener(
+    "click",
+    () => {
+
+        if (filtroStatusPedido) {
+            filtroStatusPedido.value =
+                "todos";
+        }
+
+        if (filtroMesAnoPedido) {
+            filtroMesAnoPedido.value =
+                "";
+        }
+
+        atualizarResumoPedidos();
+        renderizarPedidosAdmin();
+    }
+);
+
+
+btnAtualizarPedidos?.addEventListener(
+    "click",
+    carregarPedidos
+);
+
+
+pedidosAdmin?.addEventListener(
+    "click",
+    async evento => {
+
+        const botaoDetalhes =
+            evento.target.closest(
+                ".btn-pedido-detalhes"
+            );
+
+        if (botaoDetalhes) {
+
+            await abrirDetalhesPedido(
+                botaoDetalhes.dataset.id
+            );
+
+            return;
+        }
+
+
+        const botaoExcluirPedido =
+            evento.target.closest(
+                ".btn-pedido-excluir"
+            );
+
+        if (botaoExcluirPedido) {
+
+            await excluirPedidoAdmin(
+                botaoExcluirPedido.dataset.id
+            );
+
+            return;
+        }
+
+
+        const botaoConcluir =
+            evento.target.closest(
+                ".btn-pedido-concluir"
+            );
+
+        if (botaoConcluir) {
+
+            await alterarStatusPedido(
+                botaoConcluir.dataset.id,
+                "concluido"
+            );
+
+            return;
+        }
+
+
+        const botaoNaoConcluir =
+            evento.target.closest(
+                ".btn-pedido-nao-concluir"
+            );
+
+        if (botaoNaoConcluir) {
+
+            await alterarStatusPedido(
+                botaoNaoConcluir.dataset.id,
+                "nao_concluido"
+            );
+
+            return;
+        }
+
+
+        const botaoReabrir =
+            evento.target.closest(
+                ".btn-pedido-reabrir"
+            );
+
+        if (botaoReabrir) {
+
+            await alterarStatusPedido(
+                botaoReabrir.dataset.id,
+                "novo"
+            );
+        }
+
+    }
+);
+
+
+btnFecharDetalhesPedido?.addEventListener(
+    "click",
+    fecharDetalhesPedido
+);
+
+
+areaDetalhesPedido?.addEventListener(
+    "click",
+    evento => {
+
+        if (
+            evento.target ===
+            areaDetalhesPedido
+        ) {
+            fecharDetalhesPedido();
         }
 
     }
