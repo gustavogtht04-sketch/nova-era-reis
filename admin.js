@@ -1056,6 +1056,21 @@ btnCancelar.addEventListener(
 
 
 /* =====================================================
+   PADRONIZAR TAMANHOS EM MAIÚSCULO
+===================================================== */
+
+campoTamanhos.addEventListener(
+    "input",
+    () => {
+
+        campoTamanhos.value =
+            campoTamanhos.value.toUpperCase();
+
+    }
+);
+
+
+/* =====================================================
    SALVAR PRODUTO
 ===================================================== */
 
@@ -1112,7 +1127,9 @@ formProduto.addEventListener(
                 campoDescricao.value.trim(),
 
             tamanhos:
-                campoTamanhos.value.trim(),
+                campoTamanhos.value
+                    .trim()
+                    .toUpperCase(),
 
             cores:
                 campoCores.value.trim(),
@@ -1440,7 +1457,9 @@ function editarProduto(id) {
         produto.descricao || "";
 
     campoTamanhos.value =
-        produto.tamanhos || "";
+        String(
+            produto.tamanhos || ""
+        ).toUpperCase();
 
     campoCores.value =
         produto.cores || "";
