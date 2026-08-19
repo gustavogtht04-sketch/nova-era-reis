@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pedido | Nova Era Reis</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .pagina-pedido {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px 60px;
+        }
+
+        .pedido-cabecalho {
+            margin-bottom: 28px;
+        }
+
+        .pedido-cabecalho h1 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .pedido-codigo {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .pedido-status {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: #111;
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .pedido-lista {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .pedido-item {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 18px;
+
+            border: 1px solid #e1e1e1;
+            border-radius: 16px;
+
+            background: white;
+
+            padding: 14px;
+        }
+
+        .pedido-item-imagem {
+            width: 140px;
+            height: 160px;
+
+            border-radius: 12px;
+            overflow: hidden;
+
+            background: #f3f3f3;
+        }
+
+        .pedido-item-imagem img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .pedido-item-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .pedido-item-info h2 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .pedido-item-variacao {
+            color: #555;
+            margin-bottom: 4px;
+        }
+
+        .pedido-item-quantidade {
+            margin-bottom: 10px;
+        }
+
+        .pedido-precos {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .pedido-preco-original {
+            color: #888;
+            text-decoration: line-through;
+            font-size: 13px;
+        }
+
+        .pedido-preco-final {
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .pedido-subtotal {
+            margin-top: 8px;
+            font-weight: 700;
+        }
+
+        .pedido-resumo {
+            margin-top: 28px;
+
+            border-top: 1px solid #ddd;
+
+            padding-top: 24px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 20px;
+        }
+
+        .pedido-resumo-info p {
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .pedido-total {
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        .pedido-erro,
+        .pedido-carregando {
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .pedido-erro h2 {
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 650px) {
+
+            .pagina-pedido {
+                padding: 24px 16px 40px;
+            }
+
+            .pedido-cabecalho h1 {
+                font-size: 24px;
+            }
+
+            .pedido-item {
+                grid-template-columns: 95px 1fr;
+                gap: 12px;
+                padding: 10px;
+            }
+
+            .pedido-item-imagem {
+                width: 95px;
+                height: 115px;
+            }
+
+            .pedido-item-info h2 {
+                font-size: 17px;
+            }
+
+            .pedido-preco-final {
+                font-size: 18px;
+            }
+
+            .pedido-resumo {
+                align-items: flex-end;
+            }
+
+            .pedido-total {
+                font-size: 24px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="topo">
+
+        <div class="topo-conteudo">
+
+            <div class="marca">
+
+                <a href="index.html">
+
+                    <img
+                        src="imagens/logo-nova-era-reis.png"
+                        alt="Nova Era Reis Multimarcas"
+                        class="logo-site"
+                    >
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <main class="pagina-pedido">
+
+        <div
+            id="pedidoCarregando"
+            class="pedido-carregando"
+        >
+            Carregando pedido...
+        </div>
+
+
+        <div
+            id="pedidoConteudo"
+            style="display:none;"
+        >
+
+            <section class="pedido-cabecalho">
+
+                <h1>
+                    Pedido
+                </h1>
+
+                <p
+                    id="pedidoCodigo"
+                    class="pedido-codigo"
+                ></p>
+
+                <span
+                    id="pedidoStatus"
+                    class="pedido-status"
+                ></span>
+
+            </section>
+
+
+            <section
+                id="pedidoLista"
+                class="pedido-lista"
+            >
+            </section>
+
+
+            <section class="pedido-resumo">
+
+                <div class="pedido-resumo-info">
+
+                    <p>
+                        Quantidade de itens
+                    </p>
+
+                    <strong id="pedidoQuantidade">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <p>
+                        Total do pedido
+                    </p>
+
+                    <div
+                        id="pedidoTotal"
+                        class="pedido-total"
+                    >
+                        R$ 0,00
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <div
+            id="pedidoErro"
+            class="pedido-erro"
+            style="display:none;"
+        >
+
+            <h2>
+                Pedido não encontrado
+            </h2>
+
+            <p>
+                Não foi possível localizar este pedido.
+            </p>
+
+        </div>
+
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="supabase.js"></script>
+
+    <script src="pedido.js"></script>
+
+</body>
+
+</html>

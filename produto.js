@@ -3,81 +3,100 @@ const parametros =
         window.location.search
     );
 
+
 const idProduto =
     Number(
         parametros.get("id")
     );
 
 
+/* =====================================================
+   ELEMENTOS DA PÁGINA
+===================================================== */
+
 const imagemProduto =
     document.getElementById(
         "imagemProduto"
     );
+
 
 const miniaturasProduto =
     document.getElementById(
         "miniaturasProduto"
     );
 
+
 const categoriaProduto =
     document.getElementById(
         "categoriaProduto"
     );
+
 
 const nomeProduto =
     document.getElementById(
         "nomeProduto"
     );
 
+
 const precoProduto =
     document.getElementById(
         "precoProduto"
     );
+
 
 const tamanhosProduto =
     document.getElementById(
         "tamanhosProduto"
     );
 
+
 const coresProduto =
     document.getElementById(
         "coresProduto"
     );
+
 
 const blocoTamanhos =
     document.getElementById(
         "blocoTamanhos"
     );
 
+
 const blocoCores =
     document.getElementById(
         "blocoCores"
     );
+
 
 const descricaoProduto =
     document.getElementById(
         "descricaoProduto"
     );
 
+
 const btnDiminuirQuantidade =
     document.getElementById(
         "btnDiminuirQuantidade"
     );
+
 
 const btnAumentarQuantidade =
     document.getElementById(
         "btnAumentarQuantidade"
     );
 
+
 const quantidadeSelecionada =
     document.getElementById(
         "quantidadeSelecionada"
     );
 
+
 const btnAdicionarCarrinho =
     document.getElementById(
         "btnAdicionarCarrinho"
     );
+
 
 const mensagemCarrinho =
     document.getElementById(
@@ -85,8 +104,14 @@ const mensagemCarrinho =
     );
 
 
+/* =====================================================
+   VARIÁVEIS
+===================================================== */
+
 let tamanhoSelecionado = "";
+
 let corSelecionada = "";
+
 let quantidade = 1;
 
 let produtoSelecionado = null;
@@ -110,6 +135,152 @@ function formatarPreco(valor) {
 
 
 /* =====================================================
+   VERIFICAR PROMOÇÃO
+===================================================== */
+
+function produtoTemPromocao(produto) {
+
+    if (!produto) {
+        return false;
+    }
+
+
+    const precoOriginal =
+        Number(
+            produto.preco
+        );
+
+
+    const precoPromocional =
+        Number(
+            produto.precoPromocional
+        );
+
+
+    return (
+
+        produto.precoPromocional !== null &&
+
+        produto.precoPromocional !== undefined &&
+
+        produto.precoPromocional !== "" &&
+
+        !Number.isNaN(
+            precoPromocional
+        ) &&
+
+        precoPromocional > 0 &&
+
+        precoPromocional <
+            precoOriginal
+
+    );
+
+}
+
+
+/* =====================================================
+   OBTER PREÇO QUE SERÁ COBRADO
+===================================================== */
+
+function obterPrecoFinal(produto) {
+
+    if (
+        produtoTemPromocao(
+            produto
+        )
+    ) {
+
+        return Number(
+            produto.precoPromocional
+        );
+
+    }
+
+
+    return Number(
+        produto.preco
+    );
+
+}
+
+
+/* =====================================================
+   RENDERIZAR PREÇO
+===================================================== */
+
+function renderizarPreco() {
+
+    if (
+        !produtoSelecionado ||
+        !precoProduto
+    ) {
+
+        return;
+
+    }
+
+
+    /*
+       PRODUTO EM PROMOÇÃO
+    */
+
+    if (
+        produtoTemPromocao(
+            produtoSelecionado
+        )
+    ) {
+
+        precoProduto.innerHTML = `
+
+            <span class="preco-detalhe-promocao">
+
+                <span class="preco-detalhe-original">
+
+                    ${formatarPreco(
+                        produtoSelecionado.preco
+                    )}
+
+                </span>
+
+
+                <span class="preco-detalhe-promocional">
+
+                    ${formatarPreco(
+                        produtoSelecionado.precoPromocional
+                    )}
+
+                </span>
+
+            </span>
+
+        `;
+
+        return;
+
+    }
+
+
+    /*
+       PRODUTO SEM PROMOÇÃO
+    */
+
+    precoProduto.innerHTML = `
+
+        <span class="preco-detalhe-promocional">
+
+            ${formatarPreco(
+                produtoSelecionado.preco
+            )}
+
+        </span>
+
+    `;
+
+}
+
+
+/* =====================================================
    PRODUTO NÃO ENCONTRADO
 ===================================================== */
 
@@ -120,9 +291,13 @@ function mostrarProdutoNaoEncontrado() {
             ".detalhe-produto"
         );
 
+
     if (!detalheProduto) {
+
         return;
+
     }
+
 
     detalheProduto.innerHTML = `
 
@@ -153,33 +328,48 @@ function mostrarProdutoNaoEncontrado() {
 
 function renderizarGaleria() {
 
-    miniaturasProduto.innerHTML = "";
+    miniaturasProduto.innerHTML =
+        "";
+
 
     if (
+
         !Array.isArray(
             produtoSelecionado.imagens
-        ) ||
-        produtoSelecionado.imagens.length === 0
+        )
+
+        ||
+
+        produtoSelecionado.imagens
+            .length === 0
+
     ) {
 
         imagemProduto.removeAttribute(
             "src"
         );
 
+
         imagemProduto.alt =
             produtoSelecionado.nome;
+
 
         return;
 
     }
 
 
+    /* FOTO PRINCIPAL */
+
     imagemProduto.src =
         produtoSelecionado.imagens[0];
+
 
     imagemProduto.alt =
         produtoSelecionado.nome;
 
+
+    /* MINIATURAS */
 
     produtoSelecionado.imagens.forEach(
         (imagem, indice) => {
@@ -189,15 +379,19 @@ function renderizarGaleria() {
                     "button"
                 );
 
+
             botaoMiniatura.type =
                 "button";
+
 
             botaoMiniatura.classList.add(
                 "miniatura"
             );
 
 
-            if (indice === 0) {
+            if (
+                indice === 0
+            ) {
 
                 botaoMiniatura.classList.add(
                     "ativa"
@@ -220,9 +414,14 @@ function renderizarGaleria() {
                 "click",
                 () => {
 
+
+                    /* MUDA FOTO PRINCIPAL */
+
                     imagemProduto.src =
                         imagem;
 
+
+                    /* REMOVE SELEÇÃO */
 
                     document
                         .querySelectorAll(
@@ -238,6 +437,8 @@ function renderizarGaleria() {
                             }
                         );
 
+
+                    /* MARCA MINIATURA */
 
                     botaoMiniatura.classList.add(
                         "ativa"
@@ -263,20 +464,30 @@ function renderizarGaleria() {
 
 function renderizarTamanhos() {
 
-    tamanhosProduto.innerHTML = "";
+    tamanhosProduto.innerHTML =
+        "";
 
-    tamanhoSelecionado = "";
+
+    tamanhoSelecionado =
+        "";
 
 
     if (
+
         !Array.isArray(
             produtoSelecionado.tamanhos
-        ) ||
-        produtoSelecionado.tamanhos.length === 0
+        )
+
+        ||
+
+        produtoSelecionado.tamanhos
+            .length === 0
+
     ) {
 
         blocoTamanhos.style.display =
             "none";
+
 
         return;
 
@@ -295,8 +506,10 @@ function renderizarTamanhos() {
                     "button"
                 );
 
+
             botao.type =
                 "button";
+
 
             botao.textContent =
                 tamanho;
@@ -305,6 +518,7 @@ function renderizarTamanhos() {
             botao.addEventListener(
                 "click",
                 () => {
+
 
                     tamanhosProduto
                         .querySelectorAll(
@@ -349,20 +563,30 @@ function renderizarTamanhos() {
 
 function renderizarCores() {
 
-    coresProduto.innerHTML = "";
+    coresProduto.innerHTML =
+        "";
 
-    corSelecionada = "";
+
+    corSelecionada =
+        "";
 
 
     if (
+
         !Array.isArray(
             produtoSelecionado.cores
-        ) ||
-        produtoSelecionado.cores.length === 0
+        )
+
+        ||
+
+        produtoSelecionado.cores
+            .length === 0
+
     ) {
 
         blocoCores.style.display =
             "none";
+
 
         return;
 
@@ -381,8 +605,10 @@ function renderizarCores() {
                     "button"
                 );
 
+
             botao.type =
                 "button";
+
 
             botao.textContent =
                 cor;
@@ -391,6 +617,7 @@ function renderizarCores() {
             botao.addEventListener(
                 "click",
                 () => {
+
 
                     coresProduto
                         .querySelectorAll(
@@ -441,13 +668,18 @@ function atualizarQuantidade() {
 }
 
 
+/* DIMINUIR */
+
 btnDiminuirQuantidade.addEventListener(
     "click",
     () => {
 
-        if (quantidade > 1) {
+        if (
+            quantidade > 1
+        ) {
 
             quantidade--;
+
 
             atualizarQuantidade();
 
@@ -457,11 +689,14 @@ btnDiminuirQuantidade.addEventListener(
 );
 
 
+/* AUMENTAR */
+
 btnAumentarQuantidade.addEventListener(
     "click",
     () => {
 
         quantidade++;
+
 
         atualizarQuantidade();
 
@@ -473,13 +708,16 @@ btnAumentarQuantidade.addEventListener(
    MOSTRAR MENSAGEM
 ===================================================== */
 
-let temporizadorMensagem = null;
+let temporizadorMensagem =
+    null;
 
 
 function mostrarMensagemCarrinho() {
 
     if (!mensagemCarrinho) {
+
         return;
+
     }
 
 
@@ -488,7 +726,9 @@ function mostrarMensagemCarrinho() {
     );
 
 
-    if (temporizadorMensagem) {
+    if (
+        temporizadorMensagem
+    ) {
 
         clearTimeout(
             temporizadorMensagem
@@ -521,20 +761,30 @@ function mostrarMensagemCarrinho() {
 function validarSelecoes() {
 
     const possuiTamanhos =
+
         Array.isArray(
             produtoSelecionado.tamanhos
-        ) &&
-        produtoSelecionado.tamanhos.length >
-            0;
+        )
+
+        &&
+
+        produtoSelecionado.tamanhos
+            .length > 0;
 
 
     const possuiCores =
+
         Array.isArray(
             produtoSelecionado.cores
-        ) &&
-        produtoSelecionado.cores.length >
-            0;
+        )
 
+        &&
+
+        produtoSelecionado.cores
+            .length > 0;
+
+
+    /* TAMANHO */
 
     if (
         possuiTamanhos &&
@@ -545,10 +795,13 @@ function validarSelecoes() {
             "Por favor, selecione um tamanho."
         );
 
+
         return false;
 
     }
 
+
+    /* COR */
 
     if (
         possuiCores &&
@@ -558,6 +811,7 @@ function validarSelecoes() {
         alert(
             "Por favor, selecione uma cor."
         );
+
 
         return false;
 
@@ -575,14 +829,9 @@ function validarSelecoes() {
 
 function adicionarProdutoAoCarrinho() {
 
-    if (!produtoSelecionado) {
-
-        return;
-
-    }
-
-
-    if (!validarSelecoes()) {
+    if (
+        !produtoSelecionado
+    ) {
 
         return;
 
@@ -590,23 +839,86 @@ function adicionarProdutoAoCarrinho() {
 
 
     if (
-        !window.NovaEraCarrinho ||
-        typeof window.NovaEraCarrinho
+        !validarSelecoes()
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+
+        !window.NovaEraCarrinho
+
+        ||
+
+        typeof window
+            .NovaEraCarrinho
             .adicionar !==
             "function"
+
     ) {
 
         console.error(
             "O sistema de carrinho não foi carregado."
         );
 
+
         alert(
             "Não foi possível adicionar o produto ao carrinho."
         );
 
+
         return;
 
     }
+
+
+    /* =================================================
+       PREÇO FINAL
+    ================================================= */
+
+    const precoFinal =
+        obterPrecoFinal(
+            produtoSelecionado
+        );
+
+
+    /*
+       Criamos uma cópia do produto
+       especificamente para o carrinho.
+
+       O campo "preco" passa a ter
+       o valor que realmente será cobrado.
+
+       Também mantemos o preço original
+       para futuras melhorias.
+    */
+
+    const produtoParaCarrinho = {
+
+        ...produtoSelecionado,
+
+        precoOriginal:
+            Number(
+                produtoSelecionado.preco
+            ),
+
+        preco:
+            precoFinal,
+
+        precoPromocional:
+            produtoTemPromocao(
+                produtoSelecionado
+            )
+                ? Number(
+                    produtoSelecionado
+                        .precoPromocional
+                )
+                : null
+
+    };
 
 
     const adicionado =
@@ -614,7 +926,7 @@ function adicionarProdutoAoCarrinho() {
             .adicionar({
 
                 produto:
-                    produtoSelecionado,
+                    produtoParaCarrinho,
 
                 tamanho:
                     tamanhoSelecionado,
@@ -628,7 +940,9 @@ function adicionarProdutoAoCarrinho() {
             });
 
 
-    if (!adicionado) {
+    if (
+        !adicionado
+    ) {
 
         return;
 
@@ -639,11 +953,12 @@ function adicionarProdutoAoCarrinho() {
 
 
     /*
-       Abre o carrinho depois
-       de adicionar.
+       ABRIR O CARRINHO
+       APÓS ADICIONAR
     */
 
-    window.NovaEraCarrinho
+    window
+        .NovaEraCarrinho
         .abrir();
 
 }
@@ -665,52 +980,103 @@ btnAdicionarCarrinho.addEventListener(
 
 async function iniciarPaginaProduto() {
 
+    /*
+       Aguarda os produtos
+       carregarem do Supabase.
+    */
+
     await produtosProntos;
 
+
+    /* LOCALIZA PRODUTO */
 
     produtoSelecionado =
         produtos.find(
             produto =>
-                produto.id === idProduto
+                produto.id ===
+                idProduto
         );
 
 
-    if (!produtoSelecionado) {
+    if (
+        !produtoSelecionado
+    ) {
 
         mostrarProdutoNaoEncontrado();
+
 
         return;
 
     }
 
 
-    categoriaProduto.textContent =
-        produtoSelecionado.nomeCategoria;
+    /* =================================================
+       CATEGORIA
+    ================================================= */
 
+    categoriaProduto.textContent =
+        produtoSelecionado
+            .nomeCategoria;
+
+
+    /* =================================================
+       NOME
+    ================================================= */
 
     nomeProduto.textContent =
-        produtoSelecionado.nome;
+        produtoSelecionado
+            .nome;
 
 
-    precoProduto.textContent =
-        formatarPreco(
-            produtoSelecionado.preco
-        );
+    /* =================================================
+       PREÇO
+    ================================================= */
 
+    renderizarPreco();
+
+
+    /* =================================================
+       DESCRIÇÃO
+    ================================================= */
 
     descricaoProduto.textContent =
-        produtoSelecionado.descricao ||
+
+        produtoSelecionado
+            .descricao
+
+        ||
+
         "Sem descrição disponível.";
 
 
+    /* =================================================
+       GALERIA
+    ================================================= */
+
     renderizarGaleria();
 
+
+    /* =================================================
+       TAMANHOS
+    ================================================= */
+
     renderizarTamanhos();
+
+
+    /* =================================================
+       CORES
+    ================================================= */
 
     renderizarCores();
 
 
-    quantidade = 1;
+    /* =================================================
+       QUANTIDADE
+    ================================================= */
+
+    quantidade =
+        1;
+
 
     atualizarQuantidade();
 
