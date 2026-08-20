@@ -22,6 +22,9 @@ const campoPrecoPromocional =
 
 const campoDescricao = document.getElementById("descricao");
 const campoTamanhos = document.getElementById("tamanhos");
+
+const ajudaTamanhos =
+    document.getElementById("ajudaTamanhos");
 const campoCores = document.getElementById("cores");
 const campoDisponivel = document.getElementById("disponivel");
 
@@ -218,11 +221,10 @@ function produtoTemPromocao(produto) {
 function obterNomeCategoria(categoria) {
 
     const categorias = {
-        camisetas: "Camisetas",
-        polos: "Polos",
-        bermudas: "Bermudas",
-        calcas: "Calças",
-        conjuntos: "Conjuntos"
+        camiseta: "Camiseta",
+        regata: "Regata",
+        casaco: "Casaco",
+        bermuda: "Bermuda"
     };
 
     return categorias[categoria] || categoria || "";
@@ -995,6 +997,8 @@ function abrirFormularioNovoProduto() {
 
     campoDisponivel.checked = true;
 
+    atualizarCampoTamanhos();
+
     limparEstadoFotos();
 
     limparMensagem();
@@ -1056,13 +1060,112 @@ btnCancelar.addEventListener(
 
 
 /* =====================================================
-   PADRONIZAR TAMANHOS EM MAIÚSCULO
+   TAMANHOS CONFORME A CATEGORIA
+===================================================== */
+
+function atualizarCampoTamanhos() {
+
+    if (
+        !campoCategoria ||
+        !campoTamanhos
+    ) {
+        return;
+    }
+
+
+    const categoria =
+        campoCategoria.value;
+
+
+    /* =============================================
+       BERMUDA = TAMANHOS NUMÉRICOS
+    ============================================= */
+
+    if (
+        categoria === "bermuda"
+    ) {
+
+        campoTamanhos.placeholder =
+            "Ex.: 40, 42, 44, 46, 48, 50";
+
+        if (ajudaTamanhos) {
+
+            ajudaTamanhos.textContent =
+                "Para bermudas, use: 40, 42, 44, 46, 48 ou 50. Separe por vírgula.";
+
+        }
+
+        return;
+
+    }
+
+
+    /* =============================================
+       DEMAIS CATEGORIAS = TAMANHOS POR LETRA
+    ============================================= */
+
+    campoTamanhos.placeholder =
+        "Ex.: P, M, G, GG, G1, G2";
+
+    if (ajudaTamanhos) {
+
+        ajudaTamanhos.textContent =
+            "Use: P, M, G, GG, G1 ou G2. Separe por vírgula.";
+
+    }
+
+}
+
+
+/* =====================================================
+   AO TROCAR A CATEGORIA
+===================================================== */
+
+campoCategoria.addEventListener(
+    "change",
+    () => {
+
+        /* Limpa o tamanho anterior para evitar
+           misturar letras com numeração */
+        campoTamanhos.value = "";
+
+        atualizarCampoTamanhos();
+
+    }
+);
+
+
+/* =====================================================
+   FORMATAR TAMANHOS DIGITADOS
 ===================================================== */
 
 campoTamanhos.addEventListener(
     "input",
     () => {
 
+        const categoria =
+            campoCategoria.value;
+
+
+        /* BERMUDA:
+           permite somente números, vírgulas e espaços */
+        if (
+            categoria === "bermuda"
+        ) {
+
+            campoTamanhos.value =
+                campoTamanhos.value.replace(
+                    /[^0-9,\s]/g,
+                    ""
+                );
+
+            return;
+
+        }
+
+
+        /* DEMAIS CATEGORIAS:
+           mantém os tamanhos em maiúsculo */
         campoTamanhos.value =
             campoTamanhos.value.toUpperCase();
 
@@ -1097,6 +1200,96 @@ formProduto.addEventListener(
 
         const valorPrecoPromocional =
             campoPrecoPromocional.value.trim();
+
+
+        /* =========================================
+           VALIDAR TAMANHOS CONFORME A CATEGORIA
+        ========================================= */
+
+        const tamanhosDigitados =
+            campoTamanhos.value
+                .split(",")
+                .map(
+                    tamanho =>
+                        tamanho.trim()
+                )
+                .filter(Boolean);
+
+
+        const tamanhosPermitidosLetras = [
+            "P",
+            "M",
+            "G",
+            "GG",
+            "G1",
+            "G2"
+        ];
+
+
+        const tamanhosPermitidosBermuda = [
+            "40",
+            "42",
+            "44",
+            "46",
+            "48",
+            "50"
+        ];
+
+
+        if (
+            campoCategoria.value === "bermuda"
+        ) {
+
+            const possuiTamanhoInvalido =
+                tamanhosDigitados.some(
+                    tamanho =>
+                        !tamanhosPermitidosBermuda.includes(
+                            tamanho
+                        )
+                );
+
+
+            if (
+                possuiTamanhoInvalido
+            ) {
+
+                mostrarMensagem(
+                    "Para bermudas, use somente: 40, 42, 44, 46, 48 ou 50.",
+                    "erro"
+                );
+
+                return;
+
+            }
+
+        }
+
+
+        else {
+
+            const possuiTamanhoInvalido =
+                tamanhosDigitados.some(
+                    tamanho =>
+                        !tamanhosPermitidosLetras.includes(
+                            tamanho.toUpperCase()
+                        )
+                );
+
+
+            if (
+                possuiTamanhoInvalido
+            ) {
+
+                mostrarMensagem(
+                    "Use somente os tamanhos: P, M, G, GG, G1 ou G2.",
+                    "erro"
+                );
+
+                return;
+
+            }
+
+        }
 
 
         const dadosProduto = {
@@ -1446,6 +1639,8 @@ function editarProduto(id) {
 
     campoCategoria.value =
         produto.categoria || "";
+
+    atualizarCampoTamanhos();
 
     campoPreco.value =
         produto.preco ?? "";

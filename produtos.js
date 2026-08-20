@@ -8,11 +8,10 @@ let produtos = [];
 function obterNomeCategoria(categoria) {
 
     const categorias = {
-        camisetas: "Camisetas",
-        polos: "Polos",
-        bermudas: "Bermudas",
-        calcas: "Calças",
-        conjuntos: "Conjuntos"
+        camiseta: "Camiseta",
+        regata: "Regata",
+        casaco: "Casaco",
+        bermuda: "Bermuda"
     };
 
     return categorias[categoria] || categoria;
@@ -53,10 +52,6 @@ const produtosProntos = async function () {
         produtos = data.map(
             (produto) => {
 
-                /* =================================================
-                   TAMANHOS
-                ================================================= */
-
                 let tamanhos = [];
 
                 if (produto.tamanhos) {
@@ -72,10 +67,6 @@ const produtosProntos = async function () {
 
                 }
 
-
-                /* =================================================
-                   CORES
-                ================================================= */
 
                 let cores = [];
 
@@ -93,10 +84,6 @@ const produtosProntos = async function () {
                 }
 
 
-                /* =================================================
-                   IMAGENS
-                ================================================= */
-
                 let imagens = [];
 
                 if (Array.isArray(produto.imagens)) {
@@ -107,19 +94,11 @@ const produtosProntos = async function () {
                 }
 
 
-                /* =================================================
-                   PREÇO ORIGINAL
-                ================================================= */
-
                 const preco =
                     Number(
                         produto.preco
                     );
 
-
-                /* =================================================
-                   PREÇO PROMOCIONAL
-                ================================================= */
 
                 let precoPromocional =
                     null;
@@ -152,10 +131,6 @@ const produtosProntos = async function () {
 
                 }
 
-
-                /* =================================================
-                   PRODUTO FORMATADO
-                ================================================= */
 
                 return {
 
